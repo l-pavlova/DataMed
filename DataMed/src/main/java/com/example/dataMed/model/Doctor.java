@@ -1,0 +1,51 @@
+package com.example.dataMed.model;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+public class Doctor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column
+    private String username;
+
+    @Column
+    private String password;
+
+    @Column
+    private String firstName;
+
+    @Column
+    private String lastName;
+
+    @Column
+    private int age;
+
+    @Column
+    private String phoneNumber;
+
+    @Column
+    private String email;
+
+    @Column
+    private String position;
+
+    @Column
+    private String medicalUnit;
+
+    @Column
+    private String hospital;
+
+    @Column
+    private String certifications;
+
+}
