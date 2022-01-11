@@ -7,10 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -23,10 +20,19 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         User user = userService.createUser(userDto);
         return new ResponseEntity<>(this.modelMapper.map(user, UserDto.class), HttpStatus.CREATED);
     }
 
+    @GetMapping
+    public ResponseEntity<String> GetUser() {
+        return new ResponseEntity<String>( "text", HttpStatus.valueOf(200));
+    }
+
 }
+//lusi remember:
+//F8 == F10
+//F7 == F11
+//F9 == F5
