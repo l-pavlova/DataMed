@@ -1,4 +1,4 @@
-package com.example.dataMed.model.dto;
+package com.example.dataMed.dto;
 
 import com.example.dataMed.model.PatientRecord;
 import lombok.Getter;

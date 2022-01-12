@@ -1,0 +1,94 @@
+.register-wrapper {
+    display: block;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    min-height: 100vh;
+}
+
+.app-logo{
+    height: 40vmin;
+    position: absolute;
+    left:70%;
+}
+.register-form-wrapper {
+    background-color: transparent;
+    position: relative;
+    margin-top: 18px;
+    left: 37.5vw;
+    width: 25%;
+    height: 50%;
+}
+
+.register-title {
+    color: gray;
+    font-family: sans-serif;
+    font-weight: 200;
+    font-size: 56px;
+}
+
+.header-wrapper {
+    position: relative;
+}
+
+.register-subtitle-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.register-subtitle {
+    color: gray;
+    font-family: sans-serif;
+    font-weight: 50;
+    font-size: 18px;
+    justify-content: center;
+    padding-top: 3.5px;
+    margin: 0;
+}
+
+.register-as-usertype{
+    display: block;
+    color: gray;
+    font-family: sans-serif;
+    font-weight: 50;
+    font-size: 18px;
+    justify-content: center;
+    padding-top: 3.5px;
+    margin: 0;
+}
+
+.register-login-link-btn {
+    margin-left: 8px;
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    font-family: sans-serif;
+    font-weight: 50;
+    font-size: 18px;
+    color: rgb(87, 167, 87);
+    cursor: pointer;
+}
+.register-login-link-btn::after {
+    content: "\a";
+    white-space: pre;
+
+}
+
+.patient-doctor-link-btn{
+    margin-left: 8px;
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    font-family: sans-serif;
+    font-weight: 50;
+    font-size: 18px;
+    color: rgb(87, 167, 87);
+    cursor: pointer;
+}

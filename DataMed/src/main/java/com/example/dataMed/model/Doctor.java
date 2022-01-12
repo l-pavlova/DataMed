@@ -18,7 +18,7 @@ public class Doctor {
     @Column
     private String username;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
     @Column
@@ -33,7 +33,7 @@ public class Doctor {
     @Column
     private String phoneNumber;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column
@@ -47,5 +47,4 @@ public class Doctor {
 
     @Column
     private String certifications;
-
 }
