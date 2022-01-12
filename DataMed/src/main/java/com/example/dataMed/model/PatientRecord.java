@@ -5,21 +5,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
-// leave class for debugging purposes
+import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class PatientRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column
-    String username;
+    private Date created;
 
     @Column
-    String password;
+    private boolean isLocked;
+
+    @Column
+    private Date lastModified;
+
+    @Column
+    private Byte[] data;
 }
