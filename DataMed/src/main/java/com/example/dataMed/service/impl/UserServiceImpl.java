@@ -1,7 +1,7 @@
 package com.example.dataMed.service.impl;
 
 import com.example.dataMed.model.User;
-import com.example.dataMed.model.dto.UserDto;
+import com.example.dataMed.dto.UserDto;
 import com.example.dataMed.repository.UserRepository;
 import com.example.dataMed.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

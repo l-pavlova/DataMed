@@ -1,4 +1,4 @@
-package com.example.dataMed.model.dto;
+package com.example.dataMed.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
