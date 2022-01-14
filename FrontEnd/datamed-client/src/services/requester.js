@@ -5,6 +5,7 @@ const urlBuilder = (...paths) => {
             .filter(x => x && typeof(x) === "string")
             .join('');
 
+                console.log(url);
     return url;
 }
 
@@ -12,7 +13,7 @@ const initRequest = async (contentType, method, body) => {
     //refreshToken();
     return {
         method,
-        credentials: 'include',
+        //credentials: 'include', todo:: uncomment when auth is ready
         headers: {
             ...(contentType && { "Content-Type": contentType })
         },
@@ -41,7 +42,9 @@ const responseHandler = async res => {
 
 const requester = (endpoint) => ({
     get: () => initBaseRequest('GET').then(options => fetch(urlBuilder(HOST, endpoint), options)).then(responseHandler),
-    create: data => initBaseRequest('POST', JSON.stringify(data)).then(options => fetch(urlBuilder(HOST, endpoint), options)).then(responseHandler),
+    create: data => initBaseRequest('POST', JSON.stringify(data))
+    .then(options => fetch(urlBuilder(endpoint), options))
+    .then(responseHandler),
     update: data => initBaseRequest('PUT', JSON.stringify(data)).then(options => fetch(urlBuilder(HOST, endpoint), options)).then(responseHandler),
     delete: () => initBaseRequest('DELETE').then(options => fetch(urlBuilder(HOST, endpoint), options)).then(responseHandler),
 })

@@ -11,7 +11,8 @@ export const login = async (email, password) => {
 
 export const signupDoc = async (userData, isDoc) => {
     try {
-        isDoc ? userService.registerDoc(userData) : userService.registerPatient(userData);
+        console.log(userData);
+        isDoc ? userService.registerDoc(userData).then(doc => console.log(doc)): userService.registerPatient(userData).then(pat => console.log(pat));
     } catch (error) {
         console.log(error);
         return error;
