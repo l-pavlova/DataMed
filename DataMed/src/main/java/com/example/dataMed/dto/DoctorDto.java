@@ -8,15 +8,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class DoctorDto {
-    private int age;
-    private String username;
-    private String password;
     private String firstName;
     private String lastName;
+    private int age;
     private String phoneNumber;
-    private String email;
     private String position;
     private String medicalUnit;
     private String hospital;
     private String certifications;
+    private String username;
+    private String email;
+    private String password;
 }

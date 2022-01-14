@@ -12,7 +12,7 @@ const Register = (
     const [isDoctor, setIsDoctor] = useState(true);
 
     const handleRegister = async (userData) => {
-        await signupDoc(userData.email, userData.password);
+        await signupDoc(userData, isDoctor);
         //await userService.register(userData);
         setIsLogin(true);
     };

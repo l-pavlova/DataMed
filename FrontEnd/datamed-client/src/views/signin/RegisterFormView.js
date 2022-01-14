@@ -124,6 +124,16 @@ const RegisterFormView = ({
                 />
             </Form.Group>
             }
+             <Form.Group controlId="username">
+                <Form.Control 
+                    type="text" 
+                    className="input-field username"
+                    placeholder="Username"
+                    name="username"
+                    value={values.username}
+                    onChange={handleChange}
+                />
+            </Form.Group>
             <Form.Group controlId="formEmail">
                 <Form.Control 
                     type="email" 
@@ -160,12 +170,12 @@ const RegisterFormView = ({
                     value={values.egn}
                 />
             </Form.Group>}
-            {!isDoctor&& !isLogin && <Form.Group controlId="egn">
+            {!isDoctor&& !isLogin && <Form.Group controlId="weight">
                 <Form.Control 
                     type="text" 
-                    className="input-field egn"
-                    placeholder="EGN"
-                    name="egn"
+                    className="input-field weight"
+                    placeholder="Weight"
+                    name="weight"
                     onChange={handleChange}
                     value={values.egn}
                 />

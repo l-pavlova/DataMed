@@ -42,6 +42,7 @@ public class UserController {
     }
 
     //@CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin
     @PostMapping("/register-doc")
     public ResponseEntity<DoctorDto> registerDoc(@RequestBody DoctorDto doctorDto) {
         return doctorService.register(doctorDto);
