@@ -14,12 +14,12 @@ import java.util.List;
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column
+    @Column(unique = true)
     private String username;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
     @Column
@@ -61,4 +61,6 @@ public class Patient {
 
     @Column
     private String pillsTakenRegularly;
+
+    //byte array for profile pic
 }
