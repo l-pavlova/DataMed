@@ -13,9 +13,9 @@ import javax.persistence.*;
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column
+    @Column(unique = true)
     private String username;
 
     @Column(nullable = false)
