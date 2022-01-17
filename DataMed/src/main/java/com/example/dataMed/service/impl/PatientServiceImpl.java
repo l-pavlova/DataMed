@@ -1,5 +1,6 @@
 package com.example.dataMed.service.impl;
 
+import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.exceptions.EntityAlreadyExistException;
 import com.example.dataMed.model.Patient;
 import com.example.dataMed.repository.PatientRepository;
@@ -9,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -24,6 +29,46 @@ public class PatientServiceImpl implements PatientService {
 //        }
         return patientRepository.save(patient);
 
+    }
+
+    @Override
+    public List<Patient> getAll() {
+        return patientRepository.findAll();
+    }
+
+    @Override
+    public List<Patient> filterStatements(PatientDto patientDto) {
+        List<Patient> patients = new ArrayList<>();
+
+        List<Patient> patientsByFirstName = new ArrayList<>();
+        if (patientDto.getFirstName() != null) {
+            patientsByFirstName = patientRepository.findByFirstName(patientDto.getFirstName());
+            patients.addAll(patientsByFirstName);
+        }
+
+        List<Patient> patientsByLastName = new ArrayList<>();
+        if (patientDto.getLastName() != null) {
+            patientsByLastName = patientRepository.findByLastName(patientDto.getLastName());
+            patients.addAll(patientsByLastName);
+        }
+
+        List<Patient> patientsByEgn = new ArrayList<>();
+        if (patientDto.getEgn() != null) {
+            patientsByEgn = patientRepository.findByEgn(patientDto.getEgn());
+            patients.addAll(patientsByEgn);
+        }
+
+        if (patientsByEgn.size() != 0) {
+            patients.retainAll(patientsByEgn);
+        }
+        if (patientsByFirstName.size() != 0) {
+            patients.retainAll(patientsByFirstName);
+        }
+        if (patientsByLastName.size() != 0) {
+            patients.retainAll(patientsByLastName);
+        }
+        Set<Patient> uniquePatients = new HashSet<>(patients);
+        return new ArrayList<>(uniquePatients);
     }
 
     @Override

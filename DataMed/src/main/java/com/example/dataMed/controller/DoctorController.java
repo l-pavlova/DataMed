@@ -1,8 +1,10 @@
 package com.example.dataMed.controller;
 
 import com.example.dataMed.dto.DoctorDto;
+import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.exceptions.EntityAlreadyExistException;
 import com.example.dataMed.model.Doctor;
+import com.example.dataMed.model.Patient;
 import com.example.dataMed.service.DoctorService;
 import org.hibernate.PropertyValueException;
 import org.modelmapper.ModelMapper;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/doctors")//, produces = "application/json", consumes = "application/json"
@@ -32,7 +36,13 @@ public class DoctorController {
         Doctor doctor = modelMapper.map(doctorDto, Doctor.class);
         Doctor createdDoctor = doctorService.createDoctor(doctor);
         return new ResponseEntity<>(modelMapper.map(createdDoctor, DoctorDto.class), HttpStatus.CREATED);
+    }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<DoctorDto>> getAllDoctors() {
+        List<Doctor> doctors = doctorService.getAll();
+        List<DoctorDto> allDoctorsData = Arrays.asList(modelMapper.map(doctors, DoctorDto[].class));
+        return new ResponseEntity<>(allDoctorsData, HttpStatus.OK);
     }
 
 

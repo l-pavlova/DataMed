@@ -2,8 +2,10 @@ package com.example.dataMed.service;
 
 import com.example.dataMed.exceptions.EntityAlreadyExistException;
 import com.example.dataMed.model.Doctor;
+import com.example.dataMed.model.Patient;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 public interface DoctorService {
 
@@ -13,4 +15,6 @@ public interface DoctorService {
     Doctor getDoctor(Integer id);
 
     Doctor createDoctor(Doctor doctor);
+
+    List<Doctor> getAll();
 }
