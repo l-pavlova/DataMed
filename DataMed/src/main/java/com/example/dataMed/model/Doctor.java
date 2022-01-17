@@ -47,4 +47,9 @@ public class Doctor {
 
     @Column
     private String certifications;
+
+    @Lob
+    @Column
+    Byte[] image;
+
 }

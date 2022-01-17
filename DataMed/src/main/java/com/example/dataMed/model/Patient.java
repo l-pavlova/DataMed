@@ -62,5 +62,7 @@ public class Patient {
     @Column
     private String pillsTakenRegularly;
 
-    //byte array for profile pic
+    @Lob
+    @Column
+    Byte[] image;
 }
