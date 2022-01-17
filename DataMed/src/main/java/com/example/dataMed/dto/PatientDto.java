@@ -32,4 +32,6 @@ public class PatientDto {
     private String shortMedicalHistory;
     private String constantDiagnoses;
     private String pillsTakenRegularly;
+    private Byte[] image;
+
 }

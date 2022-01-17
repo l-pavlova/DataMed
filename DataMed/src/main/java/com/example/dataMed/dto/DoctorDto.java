@@ -21,6 +21,7 @@ public class DoctorDto {
     private String certifications;
     private String username;
     private String email;
+    private Byte[] image;
 
     @Setter(AccessLevel.NONE)
     private String password;
