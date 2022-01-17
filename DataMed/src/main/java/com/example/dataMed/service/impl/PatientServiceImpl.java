@@ -3,6 +3,7 @@ package com.example.dataMed.service.impl;
 import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.exceptions.EntityAlreadyExistException;
 import com.example.dataMed.model.Patient;
+import com.example.dataMed.model.PatientRecord;
 import com.example.dataMed.repository.PatientRepository;
 import com.example.dataMed.service.PatientService;
 import org.hibernate.PropertyValueException;
@@ -69,6 +70,12 @@ public class PatientServiceImpl implements PatientService {
         }
         Set<Patient> uniquePatients = new HashSet<>(patients);
         return new ArrayList<>(uniquePatients);
+    }
+
+    @Override
+    public List<PatientRecord> getPatientRecords(Integer id) {
+        Patient patient = patientRepository.getById(id);
+        return patient.getRecords();
     }
 
     @Override

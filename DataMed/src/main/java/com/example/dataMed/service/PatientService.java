@@ -4,6 +4,7 @@ import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.exceptions.EntityAlreadyExistException;
 import com.example.dataMed.model.Doctor;
 import com.example.dataMed.model.Patient;
+import com.example.dataMed.model.PatientRecord;
 import org.hibernate.PropertyValueException;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -19,4 +20,6 @@ public interface PatientService {
     List<Patient> getAll();
 
     List<Patient> filterStatements(PatientDto patientDto);
+
+    List<PatientRecord> getPatientRecords(Integer id);
 }

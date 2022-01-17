@@ -5,6 +5,7 @@ import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.exceptions.EntityAlreadyExistException;
 import com.example.dataMed.model.Doctor;
 import com.example.dataMed.model.Patient;
+import com.example.dataMed.model.PatientRecord;
 import com.example.dataMed.service.PatientService;
 import org.hibernate.PropertyValueException;
 import org.modelmapper.ModelMapper;
@@ -58,10 +59,11 @@ public class PatientController {
         return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
     }
 
-    //TODO
-    @GetMapping("/{id}/records")
-    public ResponseEntity<List<PatientDto>> getPatientRecords(@RequestBody PatientDto patientDto) {
-        return null;
+    // for debugging purposes
+    @GetMapping("/records")
+    public ResponseEntity<List<PatientRecord>> getPatientRecords(@RequestBody PatientDto patientDto) {
+        List<PatientRecord> records = patientService.getPatientRecords(patientDto.getId());
+        return new ResponseEntity<>(records, HttpStatus.OK);
     }
 
 
