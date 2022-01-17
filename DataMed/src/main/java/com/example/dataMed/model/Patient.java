@@ -34,14 +34,14 @@ public class Patient {
     @Column
     private String phoneNumber;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
 
     @OneToMany
     @JoinColumn(name = "id")
     private List<PatientRecord> records;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String egn;
 
     @Column
