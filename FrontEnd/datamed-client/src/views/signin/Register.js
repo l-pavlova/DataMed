@@ -3,8 +3,10 @@ import signin from "../../assets/sign_up.png";
 import { login, signupDoc } from '../../utils/authFunctions'
 import userService from '../../services/userService'
 import RegisterForm from './RegisterForm';
-
+import NavBar from '../navigation/NavBar';
 import './Register.css'
+import Footer from '../navigation/Footer';
+
 
 const Register = (
 ) => {
@@ -22,8 +24,10 @@ const Register = (
     }
 
     return (
-       
+       <div className='main'>
+           <NavBar values={[]}></NavBar>
         <div className="register-wrapper">
+           
             <img src={signin} alt="Logo"className="app-logo"/>
             <div className="header-wrapper">
                 <h1 className="register-title"> {isLogin ? "Log in to DataMed" : "Sign Up to DataMed"}</h1>
@@ -45,6 +49,8 @@ const Register = (
                     handleLogin={handleLogin}
                 />
             </div>
+        </div>
+       <Footer></Footer>
         </div>
     )
 }

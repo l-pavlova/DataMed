@@ -1,0 +1,26 @@
+:root {
+    --bg: #242626;
+    --bg-accent: #484a4d;
+    --nav-size: 60px;
+    --border: 1px solid #474a4d;
+    --border-radius: 8px;
+    --speed: 500ms;
+    --text-color: #434343;
+}
+
+.color-nav {
+    height: var(--nav-size);
+    background-color:  rgb(0,191,186);
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0;
+}
+
+.nav-link{
+    color: var(--text-color);
+}
+
+a {
+    color: var(--text-color);
+}

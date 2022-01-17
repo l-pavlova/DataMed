@@ -5,7 +5,6 @@ const urlBuilder = (...paths) => {
             .filter(x => x && typeof(x) === "string")
             .join('');
 
-                console.log(url);
     return url;
 }
 
@@ -41,12 +40,10 @@ const responseHandler = async res => {
 };
 
 const requester = (endpoint) => ({
-    get: () => initBaseRequest('GET').then(options => fetch(urlBuilder(HOST, endpoint), options)).then(responseHandler),
-    create: data => initBaseRequest('POST', JSON.stringify(data))
-    .then(options => fetch(urlBuilder(endpoint), options))
-    .then(responseHandler),
-    update: data => initBaseRequest('PUT', JSON.stringify(data)).then(options => fetch(urlBuilder(HOST, endpoint), options)).then(responseHandler),
-    delete: () => initBaseRequest('DELETE').then(options => fetch(urlBuilder(HOST, endpoint), options)).then(responseHandler),
+    get: () => initBaseRequest('GET').then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
+    create: data => initBaseRequest('POST', JSON.stringify(data)).then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
+    update: data => initBaseRequest('PUT', JSON.stringify(data)).then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
+    delete: () => initBaseRequest('DELETE').then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
 })
 
 export default requester;

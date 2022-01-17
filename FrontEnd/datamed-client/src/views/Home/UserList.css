@@ -1,0 +1,49 @@
+.user-container {
+    text-align: center;
+    position: absolute;
+    width: 30%;
+    top: 50%;
+    left: 38%;
+    display: block;
+    align-items: center;
+    color: gray;
+    font-family: sans-serif;
+    font-weight: 50;
+    font-size: 18px;
+    height:85%;overflow:auto;
+}
+
+.table {
+    position: relative;
+    table-layout:auto;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+    min-width: 0;
+    background-clip: border-box;
+    border-color: #6c757d!important;;
+    border-radius: .25rem;
+}
+
+.table .table-head {
+    background-color: #6c757d!important;
+    color: #fafafa;
+    height: 5vh;
+    font-family: sans-serif;
+    font-weight: 30;
+    font-size: 14px;
+    border-radius:2px;
+}
+
+tr {
+    grid-auto-rows: max-content;
+    margin: 0;
+}
+
+.user-prop{
+    text-align: left;
+}
+a {
+    text-decoration: none;
+}
