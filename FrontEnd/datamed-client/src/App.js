@@ -2,11 +2,12 @@ import logo from './logo.svg';
 import Register from './views/signin/Register';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './views/Home/Home';
+import Home from './views/home/Home';
+import NavBar from './views/navigation/NavBar';
+import Layout from './views/layout/layout';
 
 function App() {
   return (
-
     <Router>
       <Routes>
         <Route exact path="/" element={<Home/>}/>

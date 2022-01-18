@@ -1,8 +1,9 @@
 const api = {
     //userControler
     getUser: userName => `/users/${userName}`,
-    registerDoc: () => `/users/register-doc`,
-    registerPatient: () => `/register-patient`,
+    registerDoc: () => `/doctors`,
+    registerPatient: () => `/patients`,
+    findPatients: () => `/patients/find`,
     logginUser: () => `/users/login`,
     updateUser: () => `/user/update`,
     
