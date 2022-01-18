@@ -47,8 +47,10 @@ public class PatientController {
     }
 
     @GetMapping("/find")
-    public ResponseEntity<List<PatientDto>> getAllPatients(@RequestBody PatientDto patientDto) {
-        List<Patient> patients = patientService.filterStatements(patientDto);
+    public ResponseEntity<List<PatientDto>> getAllPatients(@RequestParam String firstName,
+                                                           @RequestParam String lastName,
+                                                           @RequestParam String egn) {
+        List<Patient> patients = patientService.filterStatements(firstName, lastName, egn);
         List<PatientDto> allPatientsData = Arrays.asList(modelMapper.map(patients, PatientDto[].class));
         return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
     }
