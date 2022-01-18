@@ -14,12 +14,12 @@ import java.util.List;
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column
+    @Column(unique = true)
     private String username;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
     @Column
@@ -34,14 +34,14 @@ public class Patient {
     @Column
     private String phoneNumber;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
 
     @OneToMany
     @JoinColumn(name = "id")
     private List<PatientRecord> records;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String egn;
 
     @Column
@@ -61,4 +61,8 @@ public class Patient {
 
     @Column
     private String pillsTakenRegularly;
+
+    @Lob
+    @Column
+    Byte[] image;
 }
