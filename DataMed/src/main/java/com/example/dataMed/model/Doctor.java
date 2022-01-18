@@ -10,32 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Doctor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(unique = true)
-    private String username;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Column
-    private String firstName;
-
-    @Column
-    private String lastName;
-
-    @Column
-    private int age;
-
-    @Column
-    private String phoneNumber;
-
-    @Column(nullable = false, unique = true)
-    private String email;
-
+public class Doctor extends User {
     @Column
     private String position;
 
@@ -47,9 +22,4 @@ public class Doctor {
 
     @Column
     private String certifications;
-
-    @Lob
-    @Column
-    Byte[] image;
-
 }
