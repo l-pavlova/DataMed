@@ -8,7 +8,7 @@ const HomeUserView = ({
 }) => {
     return (<div className='containerche'>
         <div className="main-body">
-          
+
 
             <div className="row gutters-sm">
                 <div className="col-md-4 mb-3">
@@ -17,7 +17,7 @@ const HomeUserView = ({
                             <div className="d-flex flex-column align-items-center text-center">
                                 <img src={avatar} alt="doc-avatar" className="doc-avatar" />
                                 <div className="mt-3">
-                                    <h4>John Doe</h4>
+                                    <h4>  {values.firstName || 'Bochko'}  {values.lastName || 'Bochkov'}</h4>
                                     <p className="text-secondary mb-1" value={values.position || "Cardiologist"}>Cardiologist</p>
                                     <p className="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
                                     <button className="btn btn-primary">Copy card</button>
@@ -34,8 +34,8 @@ const HomeUserView = ({
                             <div className="col-sm-3">
                                 <h6 className="mb-0">Full Name</h6>
                             </div>
-                            <div className="col-sm-9 text-secondary">
-                                Max Goodwin
+                            <div className="col-sm-9 text-secondary" >
+                                {values.firstName || 'Bochko'}  {values.lastName || 'Bochkov'}
                             </div>
                         </div>
                         <hr />
@@ -44,7 +44,7 @@ const HomeUserView = ({
                                 <h6 className="mb-0">Email</h6>
                             </div>
                             <div className="col-sm-9 text-secondary">
-                                sexydoctor@gmail.com
+                                {values.email || 'sexydoctor@gmail.com'}
                             </div>
                         </div>
                         <hr />
@@ -53,7 +53,7 @@ const HomeUserView = ({
                                 <h6 className="mb-0">Phone</h6>
                             </div>
                             <div className="col-sm-9 text-secondary">
-                                (239) 816-9029
+                                {values.phoneNumber || '(239) 816-9029'}
                             </div>
                         </div>
                         <hr />
@@ -62,7 +62,7 @@ const HomeUserView = ({
                                 <h6 className="mb-0">Hospital</h6>
                             </div>
                             <div className="col-sm-9 text-secondary">
-                                Sveta Nedelq
+                                {values.hospital || 'Sveta Nedelq'}
                             </div>
                         </div>
                         <hr />
@@ -71,7 +71,7 @@ const HomeUserView = ({
                                 <h6 className="mb-0">Medical Unit</h6>
                             </div>
                             <div className="col-sm-9 text-secondary">
-                               Cardiology
+                                {values.medicalUnit || 'Cardiology'}  
                             </div>
                         </div>
                         <hr />
@@ -83,10 +83,10 @@ const HomeUserView = ({
                     </div>
                 </div>
 
-                
+
             </div>
         </div>
-       
+
     </div>
     )
 }
