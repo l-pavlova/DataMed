@@ -15,7 +15,7 @@ public interface PatientService {
 
     List<Patient> getAll();
 
-    List<Patient> filterStatements(PatientDto patientDto);
+    List<Patient> filterStatements(String firstName, String lastName, String egn);
 
     List<PatientRecord> getPatientRecords(Integer id);
 }
