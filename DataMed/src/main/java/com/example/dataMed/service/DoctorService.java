@@ -1,6 +1,5 @@
 package com.example.dataMed.service;
 
-import com.example.dataMed.exceptions.EntityAlreadyExistException;
 import com.example.dataMed.model.Doctor;
 import com.example.dataMed.model.Patient;
 
