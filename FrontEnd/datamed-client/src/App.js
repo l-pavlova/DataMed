@@ -5,6 +5,7 @@ import './App.css';
 import Home from './views/home/Home';
 import NavBar from './views/navigation/NavBar';
 import Layout from './views/layout/layout';
+import PatientProfile from './views/patientProfile/PatientProfile';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home/>}/>
         <Route exact path="/reg" element={<Register/>}/>
+        <Route exact path="/patient" element={<PatientProfile/>}/>
       </Routes>
     </Router>
     // <div className="App">
