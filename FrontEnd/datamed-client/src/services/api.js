@@ -3,7 +3,7 @@ const api = {
     getUser: userName => `/users/${userName}`,
     registerDoc: () => `/doctors`,
     registerPatient: () => `/patients`,
-    findPatients: () => `/patients/find`,
+    findPatients: (firstName, lastName, egn) => `/patients/find?firstName=${firstName}&lastName=${lastName}&egn=${egn}`,
     logginUser: () => `/users/login`,
     updateUser: () => `/user/update`,
     
