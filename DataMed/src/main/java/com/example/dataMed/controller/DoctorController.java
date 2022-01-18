@@ -1,41 +1,48 @@
 package com.example.dataMed.controller;
 
-import com.example.dataMed.dto.DoctorDto;
-import com.example.dataMed.model.Doctor;
-import com.example.dataMed.service.DoctorService;
-import org.modelmapper.ModelMapper;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
-import java.util.List;
+import com.example.dataMed.controller.mappper.DoctorModelMapper;
+import com.example.dataMed.dto.DoctorDto;
+import com.example.dataMed.model.Doctor;
+import com.example.dataMed.service.DoctorService;
 
 @RestController
 @RequestMapping(value = "/doctors")//, produces = "application/json", consumes = "application/json"
 public class DoctorController {
     @Autowired
     private DoctorService doctorService;
-    private ModelMapper modelMapper = new ModelMapper();;
+    
+    private DoctorModelMapper modelMapper = new DoctorModelMapper();
 
     @GetMapping("/{id}")
     public ResponseEntity<DoctorDto> getDoctor(@PathVariable Integer id) {
         Doctor doctor = doctorService.getDoctor(id);
-        return new ResponseEntity<>(this.modelMapper.map(doctor, DoctorDto.class), HttpStatus.OK);
+        return new ResponseEntity<>(this.modelMapper.mapToDto(doctor), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<DoctorDto> createDoctor(@RequestBody DoctorDto doctorDto) {
-        Doctor doctor = modelMapper.map(doctorDto, Doctor.class);
+        Doctor doctor = modelMapper.mapFromDto(doctorDto);
         Doctor createdDoctor = doctorService.createDoctor(doctor);
-        return new ResponseEntity<>(modelMapper.map(createdDoctor, DoctorDto.class), HttpStatus.CREATED);
+        return new ResponseEntity<>(modelMapper.mapToDto(createdDoctor), HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<DoctorDto>> getAllDoctors() {
         List<Doctor> doctors = doctorService.getAll();
-        List<DoctorDto> allDoctorsData = Arrays.asList(modelMapper.map(doctors, DoctorDto[].class));
+        List<DoctorDto> allDoctorsData = doctors.stream().map(this.modelMapper::mapToDto).collect(Collectors.toList());
         return new ResponseEntity<>(allDoctorsData, HttpStatus.OK);
     }
 
