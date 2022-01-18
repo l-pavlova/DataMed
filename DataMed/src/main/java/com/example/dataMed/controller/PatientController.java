@@ -1,20 +1,15 @@
 package com.example.dataMed.controller;
 
-import com.example.dataMed.dto.DoctorDto;
 import com.example.dataMed.dto.PatientDto;
-import com.example.dataMed.model.Doctor;
 import com.example.dataMed.model.Patient;
 import com.example.dataMed.model.PatientRecord;
 import com.example.dataMed.service.PatientService;
-import org.hibernate.PropertyValueException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Arrays;
 import java.util.List;
 
