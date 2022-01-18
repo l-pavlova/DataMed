@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HomeUserInfo from './HomeUserInfo';
 import NavBar from '../navigation/NavBar';
 //import SearchPage from './SearchBar';
 import { SearchBar } from './SearchBar';
 import Footer from '../navigation/Footer';
 import UserList from './UserList';
-import userService from '../../services/userService';
 import { findPatients } from '../../utils/userFilters';
 const Home = () => {
 
     const initialValues = { firstName: '', lastName: '', age: '', phoneNumber: '', email: '', username: '', position: '', medicalUnit: '', hospital: '', certifications: '', password: '' };
+    const [patients, setPatients] = useState([]);
+    const [showTable, setShowTable] = useState(false);
+    useEffect(() => {
+        if (patients.length > 0) {
+            setShowTable(true);
+        }
+    }, [patients])
+
 
     const testValues = [
         {
@@ -141,28 +148,32 @@ const Home = () => {
 
     ];
 
-    const handleFindPatients = async (userData) => {
-        await findPatients(userData);
+    const handleFindPatients = async (name, lastName, egn) => {
+        console.log('in');
+        console.log(name);
+        await findPatients(name, lastName, egn).then(pats => setPatients(pats)).then(() => {
+                
+        });
         //await userService.register(userData);
-       
+
     };
 
-const [patients, setPatients] = useState(testValues);
-return (<div>
-    <NavBar
-        values={initialValues}>
-    </NavBar>
-    <HomeUserInfo
-        values={initialValues}>
-    </HomeUserInfo>
-    <SearchBar>
-    </SearchBar>
-    <UserList
-        users={patients}>
-    </UserList>
-    <Footer>
-    </Footer>
-</div>);
+
+    return (<div>
+        <NavBar
+            values={initialValues}>
+        </NavBar>
+        <HomeUserInfo
+            values={initialValues}>
+        </HomeUserInfo>
+        <SearchBar handleSearchPatients={handleFindPatients}>
+        </SearchBar>
+        {showTable && <UserList
+            users={patients}>
+        </UserList>}
+        <Footer>
+        </Footer>
+    </div>);
 }
 
 export default Home
