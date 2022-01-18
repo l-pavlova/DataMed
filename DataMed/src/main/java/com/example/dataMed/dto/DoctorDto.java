@@ -1,13 +1,16 @@
 package com.example.dataMed.dto;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.ReadOnlyProperty;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class DoctorDto {
+    private Integer id;
     private String firstName;
     private String lastName;
     private int age;
@@ -18,5 +21,8 @@ public class DoctorDto {
     private String certifications;
     private String username;
     private String email;
+    private Byte[] image;
+
+    @Setter(AccessLevel.NONE)
     private String password;
 }

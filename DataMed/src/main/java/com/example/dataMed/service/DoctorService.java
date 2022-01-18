@@ -1,10 +1,20 @@
 package com.example.dataMed.service;
 
-import com.example.dataMed.dto.DoctorDto;
-import org.springframework.http.ResponseEntity;
+import com.example.dataMed.exceptions.EntityAlreadyExistException;
+import com.example.dataMed.model.Doctor;
+import com.example.dataMed.model.Patient;
+
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 public interface DoctorService {
 
-    ResponseEntity<DoctorDto> register(DoctorDto doctorDto);
-    ResponseEntity<DoctorDto> login(String username, String password);
+//    ResponseEntity<DoctorDto> register(DoctorDto doctorDto);
+//    ResponseEntity<DoctorDto> login(String username, String password);
+//
+    Doctor getDoctor(Integer id);
+
+    Doctor createDoctor(Doctor doctor);
+
+    List<Doctor> getAll();
 }
