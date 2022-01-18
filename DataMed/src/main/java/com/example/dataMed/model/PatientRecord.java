@@ -10,14 +10,13 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 public class PatientRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
-    private Date created;
+    private String createdAt;
 
     @Column
     private boolean isLocked;
@@ -26,8 +25,24 @@ public class PatientRecord {
     private String fileName;
 
     @Column
-    private Date lastModified;
+    private String lastModifiedAt;
 
     @Lob
-    private Byte[] data;
+    private byte[] data;
+
+    public PatientRecord() { }
+    public PatientRecord(String fileName, String createdAt, String lastModifiedAt, byte[] data) {
+        this.fileName = fileName;
+        this.createdAt = createdAt;
+        this.lastModifiedAt = lastModifiedAt;
+        this.data = data;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public byte[] getData() {
+        return data;
+    }
 }

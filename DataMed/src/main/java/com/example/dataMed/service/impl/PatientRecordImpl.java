@@ -18,7 +18,7 @@ public class PatientRecordImpl implements PatientRecordService {
     @Autowired
     private PatientRecordRepository patientRecordRepository;
 
-    public PatientRecord storeFile(String created, String modified, MultipartFile file) {
+    public PatientRecord storeFile(String createdAt, String modifiedAt, MultipartFile file) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
@@ -27,7 +27,7 @@ public class PatientRecordImpl implements PatientRecordService {
             if (fileName.contains("..")) {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
-            PatientRecord record = new PatientRecord(fileName, file.getContentType(), created, modified, file.getBytes());
+            PatientRecord record = new PatientRecord(fileName, createdAt, modifiedAt, file.getBytes());
 
             return patientRecordRepository.save(record);
         } catch (IOException ex) {
@@ -35,7 +35,7 @@ public class PatientRecordImpl implements PatientRecordService {
         }
     }
 
-    public PatientRecord getFile(String fileId) throws FileNotFoundException {
+    public PatientRecord getFile(Integer fileId) throws FileNotFoundException {
         return patientRecordRepository.findById(fileId)
                 .orElseThrow(() -> new FileNotFoundException("File not found with id " + fileId));
     }
