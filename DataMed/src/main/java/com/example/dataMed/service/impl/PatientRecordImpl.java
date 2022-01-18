@@ -1,5 +1,6 @@
 package com.example.dataMed.service.impl;
 
+import com.example.dataMed.exceptions.FileStorageException;
 import com.example.dataMed.model.PatientRecord;
 import com.example.dataMed.repository.PatientRecordRepository;
 import com.example.dataMed.service.PatientRecordService;
@@ -12,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 @Service
-public class PatientRecordImpl implements PatientRecordServiceg {
+public class PatientRecordImpl implements PatientRecordService {
 
     @Autowired
     private PatientRecordRepository patientRecordRepository;
