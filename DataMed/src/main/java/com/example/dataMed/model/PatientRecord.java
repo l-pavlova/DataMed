@@ -23,8 +23,11 @@ public class PatientRecord {
     private boolean isLocked;
 
     @Column
-    private Date lastModified;
+    private String fileName;
 
     @Column
+    private Date lastModified;
+
+    @Lob
     private Byte[] data;
 }
