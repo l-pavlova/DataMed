@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,32 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Table(name="patient")
-public class Patient {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(unique = true)
-    private String username;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Column
-    String firstName;
-
-    @Column
-    String lastName;
-
-    @Column
-    private int age;
-
-    @Column
-    private String phoneNumber;
-
-    @Column(nullable = false, unique = true)
-    private String email;
-
+public class Patient extends User {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<PatientRecord> records;

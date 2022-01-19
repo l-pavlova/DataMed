@@ -36,24 +36,24 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<Patient> filterStatements(PatientDto patientDto) {
+    public List<Patient> filterStatements(String firstName, String lastName, String egn) {
         List<Patient> patients = new ArrayList<>();
 
         List<Patient> patientsByFirstName = new ArrayList<>();
-        if (patientDto.getFirstName() != null) {
-            patientsByFirstName = patientRepository.findByFirstName(patientDto.getFirstName());
+        if (firstName.length() != 0) {
+            patientsByFirstName = patientRepository.findByFirstName(firstName);
             patients.addAll(patientsByFirstName);
         }
 
         List<Patient> patientsByLastName = new ArrayList<>();
-        if (patientDto.getLastName() != null) {
-            patientsByLastName = patientRepository.findByLastName(patientDto.getLastName());
+        if (lastName.length() != 0) {
+            patientsByLastName = patientRepository.findByLastName(lastName);
             patients.addAll(patientsByLastName);
         }
 
         List<Patient> patientsByEgn = new ArrayList<>();
-        if (patientDto.getEgn() != null) {
-            patientsByEgn = patientRepository.findByEgn(patientDto.getEgn());
+        if (egn.length() != 0) {
+            patientsByEgn = patientRepository.findByEgn(egn);
             patients.addAll(patientsByEgn);
         }
 

@@ -1,8 +1,6 @@
 package com.example.dataMed.service;
 
-import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.model.Patient;
-import com.example.dataMed.model.PatientRecord;
 
 import java.util.List;
 
@@ -14,5 +12,5 @@ public interface PatientService {
 
     List<Patient> getAll();
 
-    List<Patient> filterStatements(PatientDto patientDto);
+    List<Patient> filterStatements(String firstName, String lastName, String egn);
 }

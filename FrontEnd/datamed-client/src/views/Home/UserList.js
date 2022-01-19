@@ -11,28 +11,29 @@ const User = ({ props }) => {
     </tr>)
 }
 
-const UserList = ({ users }) => {
+const UserList = ({ users,
+    showUserData }) => {
 
     return (
-    <div className='user-container '><table className="table table-striped">
-        <thead className="table-head">
-            <tr>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">EGN</th>
-            </tr>
-        </thead>
-        <tbody>
-            {
-                users.map((user) => <tr key={user.username.toString()} className="table-row">
-                    <td><a href="#">{user.username || ' '}</a></td>
-                    <td><a>{user.lastName || 'egenence '} </a></td>
-                    <td><a>{user.EGN || "egenence"}</a></td>
-                </tr>)
-            }
-        </tbody>
-    </table >
-    </div>)
+        <div className='user-container '><table className="table table-striped">
+            <thead className="table-head">
+                <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">EGN</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    users.map((user) => <tr key={user.username.toString()} className="table-row">
+                        <td><a href={`/patients/${user.id} `}>{user.firstName || 'vasko pass patient profile'}</a></td>
+                        <td><a>{user.lastName || 'imence '} </a></td>
+                        <td><a>{user.egn || "egenence"}</a></td>
+                    </tr>)
+                }
+            </tbody>
+        </table >
+        </div>)
 }
 
 export default UserList;
