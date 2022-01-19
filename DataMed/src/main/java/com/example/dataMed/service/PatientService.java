@@ -7,7 +7,6 @@ import com.example.dataMed.model.PatientRecord;
 import java.util.List;
 
 public interface PatientService {
-    int getPatientRecord();
 
     Patient getPatient(Integer id);
 
@@ -16,6 +15,4 @@ public interface PatientService {
     List<Patient> getAll();
 
     List<Patient> filterStatements(PatientDto patientDto);
-
-    List<PatientRecord> getPatientRecords(Integer id);
 }

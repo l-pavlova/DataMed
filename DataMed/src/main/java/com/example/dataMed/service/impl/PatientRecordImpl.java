@@ -13,10 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,10 +25,11 @@ public class PatientRecordImpl implements PatientRecordService {
 
     @Autowired
     private PatientRecordRepository patientRecordRepository;
+
     @Autowired
     private PatientRepository patientRepository;
 
-    public ResponseEntity addRecord(int id, MultipartFile file) {
+    public ResponseEntity addRecord(Integer id, MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             Patient patient = patientRepository.getById(id);
@@ -44,12 +43,22 @@ public class PatientRecordImpl implements PatientRecordService {
                 HttpStatus.OK);
     }
 
-    //this is not working atm, will fix it
-/*
-    public PatientRecord getPatientRecord(String filename ) throws FileNotFoundException {
-        return patientRecordRepository.findById(fileId)
-                .orElseThrow(() -> new FileNotFoundException("File not found with id " + fileId));
+    @Override
+    public List<PatientRecord> getPatientRecords(Integer id) {
+        return patientRepository.getById(id).getRecords();
     }
- */
+
+    @Override
+    public PatientRecord getPatientRecord(Integer id, String filename) {
+        List<PatientRecord> records = patientRepository.getById(id).getRecords();
+        PatientRecord patientRecord = null;
+        for (PatientRecord record : records) {
+            if (record.getFileName().equals(filename)) {
+                patientRecord = record;
+
+            }
+        }
+        return patientRecord;
+    }
 }
 

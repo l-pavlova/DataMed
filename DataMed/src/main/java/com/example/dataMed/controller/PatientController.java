@@ -1,6 +1,7 @@
 package com.example.dataMed.controller;
 
 import com.example.dataMed.dto.PatientDto;
+import com.example.dataMed.dto.PatientRecordDto;
 import com.example.dataMed.model.Patient;
 import com.example.dataMed.model.PatientRecord;
 import com.example.dataMed.service.PatientService;
@@ -23,6 +24,7 @@ public class PatientController {
     @GetMapping("/{id}")
     public ResponseEntity<PatientDto> getPatient(@PathVariable Integer id) {
         Patient patient = patientService.getPatient(id);
+
         return new ResponseEntity<>(this.modelMapper.map(patient, PatientDto.class), HttpStatus.OK);
     }
 
@@ -30,6 +32,7 @@ public class PatientController {
     public ResponseEntity<PatientDto> createPatient(@RequestBody PatientDto patientDto) {
         Patient patient = modelMapper.map(patientDto, Patient.class);
         Patient createdPatient = patientService.createPatient(patient);
+
         return new ResponseEntity<>(modelMapper.map(createdPatient, PatientDto.class), HttpStatus.CREATED);
     }
 
@@ -43,6 +46,7 @@ public class PatientController {
     public ResponseEntity<List<PatientDto>> getAllPatients() {
         List<Patient> patients = patientService.getAll();
         List<PatientDto> allPatientsData = Arrays.asList(modelMapper.map(patients, PatientDto[].class));
+
         return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
     }
 
@@ -50,12 +54,9 @@ public class PatientController {
     public ResponseEntity<List<PatientDto>> getAllPatients(@RequestBody PatientDto patientDto) {
         List<Patient> patients = patientService.filterStatements(patientDto);
         List<PatientDto> allPatientsData = Arrays.asList(modelMapper.map(patients, PatientDto[].class));
+
         return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
     }
 
-    @GetMapping("/records")
-    public ResponseEntity<List<PatientRecord>> getPatientRecords(@RequestBody Integer id) {
-        List<PatientRecord> records =  patientService.getPatientRecords(id);
-        return new ResponseEntity<>(records, HttpStatus.OK);
-    }
+
 }

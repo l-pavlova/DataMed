@@ -1,5 +1,6 @@
 package com.example.dataMed.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,6 +41,7 @@ public class Patient {
     private String email;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<PatientRecord> records;
 
     @Column(nullable = false, unique = true)

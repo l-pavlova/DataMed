@@ -6,11 +6,9 @@ import com.example.dataMed.model.PatientRecord;
 import com.example.dataMed.repository.PatientRecordRepository;
 import com.example.dataMed.repository.PatientRepository;
 import com.example.dataMed.service.PatientService;
-import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,9 +19,6 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private PatientRepository patientRepository;
-
-    @Autowired
-    private PatientRecordRepository patientRecordRepository;
 
     @Override
     public Patient createPatient(Patient patient) {
@@ -73,16 +68,6 @@ public class PatientServiceImpl implements PatientService {
         }
         Set<Patient> uniquePatients = new HashSet<>(patients);
         return new ArrayList<>(uniquePatients);
-    }
-
-    @Override
-    public List<PatientRecord> getPatientRecords(Integer id) {
-        return patientRepository.getById(id).getRecords();
-    }
-
-    @Override
-    public int getPatientRecord() {
-        return 0;
     }
 
     @Override
