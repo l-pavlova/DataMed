@@ -11,32 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Patient {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(unique = true)
-    private String username;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Column
-    String firstName;
-
-    @Column
-    String lastName;
-
-    @Column
-    private int age;
-
-    @Column
-    private String phoneNumber;
-
-    @Column(nullable = false, unique = true)
-    private String email;
-
+public class Patient extends User {
     @OneToMany
     @JoinColumn(name = "id")
     private List<PatientRecord> records;
@@ -61,8 +36,4 @@ public class Patient {
 
     @Column
     private String pillsTakenRegularly;
-
-    @Lob
-    @Column
-    Byte[] image;
 }

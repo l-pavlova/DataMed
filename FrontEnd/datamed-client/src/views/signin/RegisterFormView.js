@@ -177,7 +177,7 @@ const RegisterFormView = ({
                     placeholder="Weight"
                     name="weight"
                     onChange={handleChange}
-                    value={values.egn}
+                    value={values.weight}
                 />
             </Form.Group>}
             {!isDoctor&& !isLogin && <Form.Group controlId="height">

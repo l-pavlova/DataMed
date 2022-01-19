@@ -12,6 +12,7 @@ const Home = () => {
     const [patients, setPatients] = useState([]);
     const [showTable, setShowTable] = useState(false);
     useEffect(() => {
+        console.log(patients);
         if (patients.length > 0) {
             setShowTable(true);
         }
@@ -151,9 +152,11 @@ const Home = () => {
     const handleFindPatients = async (name, lastName, egn) => {
         console.log('in');
         console.log(name);
-        await findPatients(name, lastName, egn).then(pats => setPatients(pats)).then(() => {
-                
+        await findPatients(name, lastName, egn).then(pats => {
+            console.log(pats);
+            setPatients(pats)
         });
+       
         //await userService.register(userData);
 
     };
