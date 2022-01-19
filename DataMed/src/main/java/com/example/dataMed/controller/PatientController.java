@@ -53,13 +53,9 @@ public class PatientController {
         return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
     }
 
-    // for debugging purposes
     @GetMapping("/records")
-    public ResponseEntity<List<PatientRecord>> getPatientRecords(@RequestBody PatientDto patientDto) {
-        List<PatientRecord> records = patientService.getPatientRecords(patientDto.getId());
+    public ResponseEntity<List<PatientRecord>> getPatientRecords(@RequestBody Integer id) {
+        List<PatientRecord> records =  patientService.getPatientRecords(id);
         return new ResponseEntity<>(records, HttpStatus.OK);
     }
-
-
-
 }

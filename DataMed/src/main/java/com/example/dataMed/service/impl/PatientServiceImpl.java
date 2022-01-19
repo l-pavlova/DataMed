@@ -3,6 +3,7 @@ package com.example.dataMed.service.impl;
 import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.model.Patient;
 import com.example.dataMed.model.PatientRecord;
+import com.example.dataMed.repository.PatientRecordRepository;
 import com.example.dataMed.repository.PatientRepository;
 import com.example.dataMed.service.PatientService;
 import org.hibernate.PropertyValueException;
@@ -20,6 +21,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private PatientRepository patientRepository;
+
+    @Autowired
+    private PatientRecordRepository patientRecordRepository;
 
     @Override
     public Patient createPatient(Patient patient) {
@@ -73,8 +77,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<PatientRecord> getPatientRecords(Integer id) {
-        Patient patient = patientRepository.getById(id);
-        return patient.getRecords();
+        return patientRepository.getById(id).getRecords();
     }
 
     @Override
