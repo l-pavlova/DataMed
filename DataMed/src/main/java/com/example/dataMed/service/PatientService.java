@@ -1,13 +1,12 @@
 package com.example.dataMed.service;
 
-import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.model.Patient;
-import com.example.dataMed.model.PatientRecord;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface PatientService {
-    int getPatientRecord();
 
     Patient getPatient(Integer id);
 
@@ -17,5 +16,5 @@ public interface PatientService {
 
     List<Patient> filterStatements(String firstName, String lastName, String egn);
 
-    List<PatientRecord> getPatientRecords(Integer id);
+    ResponseEntity addProfilePicture(Integer id, MultipartFile picture);
 }

@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import com.example.dataMed.controller.mappper.PatientModelMapper;
 import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.model.Patient;
-import com.example.dataMed.model.PatientRecord;
 import com.example.dataMed.service.PatientService;
+import org.springframework.web.multipart.MultipartFile;
+
 
 @RestController
 @RequestMapping(value = "/patients")//, produces = "application/json", consumes = "application/json"
@@ -57,13 +58,11 @@ public class PatientController {
         return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
     }
 
-    // for debugging purposes
-    @GetMapping("/records")
-    public ResponseEntity<List<PatientRecord>> getPatientRecords(@RequestBody PatientDto patientDto) {
-        List<PatientRecord> records = patientService.getPatientRecords(patientDto.getId());
-        return new ResponseEntity<>(records, HttpStatus.OK);
+    @PostMapping("/addProfilePic")
+    public ResponseEntity addProfilePicture(@RequestParam("id") Integer id,
+                                            @RequestParam("picture") MultipartFile picture) {
+
+        return patientService.addProfilePicture(id, picture);
     }
-
-
 
 }
