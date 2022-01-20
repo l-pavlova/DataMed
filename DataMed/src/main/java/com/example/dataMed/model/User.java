@@ -41,5 +41,5 @@ public class User {
     
     @Lob
     @Column
-    private Byte[] image;
+    private byte[] image;
 }

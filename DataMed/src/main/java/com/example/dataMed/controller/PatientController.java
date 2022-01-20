@@ -12,6 +12,7 @@ import com.example.dataMed.controller.mappper.PatientModelMapper;
 import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.model.Patient;
 import com.example.dataMed.service.PatientService;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -56,4 +57,12 @@ public class PatientController {
         List<PatientDto> allPatientsData = patients.stream().map(modelMapper::mapToDto).collect(Collectors.toList());
         return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
     }
+
+    @PostMapping("/addProfilePic")
+    public ResponseEntity addProfilePicture(@RequestParam("id") Integer id,
+                                            @RequestParam("picture") MultipartFile picture) {
+
+        return patientService.addProfilePicture(id, picture);
+    }
+
 }

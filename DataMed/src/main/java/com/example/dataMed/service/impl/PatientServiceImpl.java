@@ -1,11 +1,17 @@
 package com.example.dataMed.service.impl;
 
+import com.example.dataMed.exceptions.FileStorageException;
 import com.example.dataMed.model.Patient;
 import com.example.dataMed.repository.PatientRepository;
 import com.example.dataMed.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -70,5 +76,21 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Patient getPatient(Integer id) {
         return patientRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public ResponseEntity addProfilePicture(Integer id, MultipartFile picture) {
+
+        String fileName = StringUtils.cleanPath(picture.getOriginalFilename());
+        try {
+            Patient patient = patientRepository.getById(id);
+            patient.setImage(picture.getBytes());
+            patientRepository.save(patient);
+
+        } catch (IOException e) {
+            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", e);
+        }
+        return new ResponseEntity<>("Your picture is uploaded successfully!",
+                HttpStatus.CREATED);
     }
 }
