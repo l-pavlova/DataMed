@@ -38,8 +38,4 @@ public class Patient extends User {
 
     @Column
     private String pillsTakenRegularly;
-
-    @Lob
-    @Column
-    Byte[] image;
 }
