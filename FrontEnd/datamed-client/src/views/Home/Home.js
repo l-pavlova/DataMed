@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import HomeUserInfo from './HomeUserInfo';
 import NavBar from '../navigation/NavBar';
-//import SearchPage from './SearchBar';
 import { SearchBar } from './SearchBar';
 import Footer from '../navigation/Footer';
 import UserList from './UserList';
 import { findPatients } from '../../utils/userFilters';
+import Templates from './TemplateList';
 const Home = () => {
 
     const initialValues = { firstName: '', lastName: '', age: '', phoneNumber: '', email: '', username: '', position: '', medicalUnit: '', hospital: '', certifications: '', password: '' };
@@ -174,7 +174,9 @@ const Home = () => {
         {showTable && <UserList
             users={patients}>
         </UserList>}
+        <Templates className='container-tempaltes'></Templates>
         <Footer>
+
         </Footer>
     </div>);
 }
