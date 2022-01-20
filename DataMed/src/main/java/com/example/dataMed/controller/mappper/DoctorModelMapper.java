@@ -1,14 +1,17 @@
 package com.example.dataMed.controller.mappper;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import com.example.dataMed.dto.DoctorDto;
 import com.example.dataMed.model.Doctor;
 
+@Component
 public class DoctorModelMapper {
-	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	private ModelMapper modelMapper = new ModelMapper();
 	

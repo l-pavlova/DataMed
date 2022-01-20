@@ -20,6 +20,7 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
+    @Autowired
     private PatientModelMapper modelMapper = new PatientModelMapper();
 
     @GetMapping("/{id}")

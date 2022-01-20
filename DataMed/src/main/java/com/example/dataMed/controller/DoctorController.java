@@ -24,7 +24,8 @@ public class DoctorController {
     @Autowired
     private DoctorService doctorService;
     
-    private DoctorModelMapper modelMapper = new DoctorModelMapper();
+    @Autowired
+    private DoctorModelMapper modelMapper;
 
     @GetMapping("/{id}")
     public ResponseEntity<DoctorDto> getDoctor(@PathVariable Integer id) {
