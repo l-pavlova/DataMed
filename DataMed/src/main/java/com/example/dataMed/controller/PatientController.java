@@ -21,7 +21,7 @@ public class PatientController {
     private PatientService patientService;
 
     @Autowired
-    private PatientModelMapper modelMapper = new PatientModelMapper();
+    private PatientModelMapper modelMapper;
 
     @GetMapping("/{id}")
     public ResponseEntity<PatientDto> getPatient(@PathVariable Integer id) {
