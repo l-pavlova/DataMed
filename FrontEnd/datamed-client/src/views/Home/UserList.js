@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import './UserList.css'
 
@@ -26,9 +27,9 @@ const UserList = ({ users,
             <tbody>
                 {
                     users.map((user) => <tr key={user.username.toString()} className="table-row">
-                        <td><a href={`/patients/${user.id} `}>{user.firstName || 'vasko pass patient profile'}</a></td>
-                        <td><a>{user.lastName || 'imence '} </a></td>
-                        <td><a>{user.egn || "egenence"}</a></td>
+                        <td> <Link to={`/patient`} state={{patient: user}}>{user.firstName || 'vascho'}</Link></td>
+                        <td>{user.lastName || 'imence '}</td>
+                        <td>{user.egn || "egenence"}</td>
                     </tr>)
                 }
             </tbody>
