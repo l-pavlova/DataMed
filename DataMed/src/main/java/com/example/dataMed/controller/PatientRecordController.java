@@ -21,18 +21,16 @@ public class PatientRecordController {
     private ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
-    private PatientService patientService;
-
-    @Autowired
     private PatientRecordService patientRecordService;
 
     @PostMapping ("/uploadFile")
-    public ResponseEntity addPatientRecord(@RequestBody MultipartFile file, Integer id) {
+    public ResponseEntity addPatientRecord(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id) {
         return patientRecordService.addRecord(id, file);
     }
 
     @PostMapping("/uploadMultipleFiles")
-    public List<ResponseEntity<PatientRecordDto>> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files,Integer id) {
+    public List<ResponseEntity<PatientRecordDto>> addMultipleRecords(@RequestParam("files") MultipartFile[] files,
+                                                                     @RequestParam("id") Integer id) {
         List<ResponseEntity<PatientRecordDto>> responseEntities = new ArrayList<>();
         for (MultipartFile file: files) {
            responseEntities.add(addPatientRecord(file,id));
@@ -43,15 +41,16 @@ public class PatientRecordController {
     @GetMapping("/records")
     public ResponseEntity<List<PatientRecordDto>> getPatientRecords(@RequestParam("id") Integer id) {
         List<PatientRecord> records =  patientRecordService.getPatientRecords(id);
-        List<PatientRecordDto> allPatientsData = Arrays.asList(modelMapper.map(records, PatientRecordDto[].class));
+        List<PatientRecordDto> allPatientRecords = Arrays.asList(modelMapper.map(records, PatientRecordDto[].class));
 
-        return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
+        return new ResponseEntity<>(allPatientRecords, HttpStatus.OK);
     }
 
     @GetMapping("/record")
-    public ResponseEntity<PatientRecord> getPatientRecord(@RequestParam("id") Integer id, @RequestParam("filename")String filename) {
+    public ResponseEntity<PatientRecordDto> getPatientRecord(@RequestParam("id") Integer id,
+                                                             @RequestParam("filename")String filename) {
         PatientRecord record =  patientRecordService.getPatientRecord(id, filename);
 
-        return new ResponseEntity<>(record, HttpStatus.OK);
+        return new ResponseEntity<>(modelMapper.map(record, PatientRecordDto.class), HttpStatus.OK);
     }
 }

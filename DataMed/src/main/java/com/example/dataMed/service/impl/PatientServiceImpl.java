@@ -1,9 +1,6 @@
 package com.example.dataMed.service.impl;
 
-import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.model.Patient;
-import com.example.dataMed.model.PatientRecord;
-import com.example.dataMed.repository.PatientRecordRepository;
 import com.example.dataMed.repository.PatientRepository;
 import com.example.dataMed.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -40,7 +40,7 @@ public class PatientRecordImpl implements PatientRecordService {
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", e);
         }
         return new ResponseEntity<>("Your picture is uploaded successfully!",
-                HttpStatus.OK);
+                HttpStatus.CREATED);
     }
 
     @Override
