@@ -7,6 +7,7 @@ const recordsService = {
     getRecords: (patientId) => requester(api.getRecords(patientId)).get(),
     addRecord: async (formData) => await requester(api.addRecord()).create(formData),
     addMultipleRecords: async (formData) => await requester(api.addMultipleRecords()).create(formData),
+    addTemplate: async (formData) => await requester(api.addMultipleRecords()).create(formData),
 }
 
 export default recordsService;

@@ -20,7 +20,3 @@ const NavBar = ({ values, isSignedIn=false }) => {
 }
 
 export default NavBar;
-
-/*
-  
-*/
