@@ -1,15 +1,11 @@
 package com.example.dataMed.service.impl;
 
-import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.model.Patient;
-import com.example.dataMed.model.PatientRecord;
 import com.example.dataMed.repository.PatientRepository;
 import com.example.dataMed.service.PatientService;
-import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -41,19 +37,19 @@ public class PatientServiceImpl implements PatientService {
         List<Patient> patients = new ArrayList<>();
 
         List<Patient> patientsByFirstName = new ArrayList<>();
-        if (firstName != null) {
+        if (firstName.length() != 0) {
             patientsByFirstName = patientRepository.findByFirstName(firstName);
             patients.addAll(patientsByFirstName);
         }
 
         List<Patient> patientsByLastName = new ArrayList<>();
-        if (lastName != null) {
+        if (lastName.length() != 0) {
             patientsByLastName = patientRepository.findByLastName(lastName);
             patients.addAll(patientsByLastName);
         }
 
         List<Patient> patientsByEgn = new ArrayList<>();
-        if (egn != null) {
+        if (egn.length() != 0) {
             patientsByEgn = patientRepository.findByEgn(egn);
             patients.addAll(patientsByEgn);
         }
@@ -69,17 +65,6 @@ public class PatientServiceImpl implements PatientService {
         }
         Set<Patient> uniquePatients = new HashSet<>(patients);
         return new ArrayList<>(uniquePatients);
-    }
-
-    @Override
-    public List<PatientRecord> getPatientRecords(Integer id) {
-        Patient patient = patientRepository.getById(id);
-        return patient.getRecords();
-    }
-
-    @Override
-    public int getPatientRecord() {
-        return 0;
     }
 
     @Override

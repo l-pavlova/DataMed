@@ -2,9 +2,10 @@ import logo from './logo.svg';
 import Register from './views/signin/Register';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './views/home/Home';
+import Home from './views/Home/Home';
 import NavBar from './views/navigation/NavBar';
 import Layout from './views/layout/layout';
+import PatientProfile from './views/patientProfile/PatientProfile';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home/>}/>
         <Route exact path="/reg" element={<Register/>}/>
+        <Route path="/patient/" element={<PatientProfile/>}/>
       </Routes>
     </Router>
     // <div className="App">

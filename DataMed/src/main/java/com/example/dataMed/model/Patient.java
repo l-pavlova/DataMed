@@ -1,5 +1,6 @@
 package com.example.dataMed.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,9 +12,10 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name="patient")
 public class Patient extends User {
-    @OneToMany
-    @JoinColumn(name = "id")
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<PatientRecord> records;
 
     @Column(nullable = false, unique = true)
@@ -36,4 +38,8 @@ public class Patient extends User {
 
     @Column
     private String pillsTakenRegularly;
+
+    @Lob
+    @Column
+    Byte[] image;
 }

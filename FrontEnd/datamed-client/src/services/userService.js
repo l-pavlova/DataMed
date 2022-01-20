@@ -7,6 +7,7 @@ const userService = {
     registerDoc: async(userData) => await requester(api.registerDoc()).create(userData),
     registerPatient: async(userData) => await requester(api.registerPatient()).create(userData),
     findPatients: async(firstName, lastName, EGN) => await requester(api.findPatients(firstName, lastName, EGN)).get(),
+    getPatientById: async(id) => await requester(api.getPatientById(id)).get()
 }
 
 export default userService;

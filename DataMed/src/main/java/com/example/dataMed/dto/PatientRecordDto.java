@@ -9,8 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PatientRecordDto {
-//    private Date created;
-//    private boolean isLocked;
-//    private Date lastModified;
+    private String created;
+    private boolean isLocked;
+    private String lastModified;
+    private String fileName;
     private Byte[] data;
 }
