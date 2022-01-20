@@ -156,7 +156,7 @@ const Home = () => {
             console.log(pats);
             setPatients(pats)
         });
-       
+
         //await userService.register(userData);
 
     };
@@ -164,7 +164,8 @@ const Home = () => {
 
     return (<div>
         <NavBar
-            values={initialValues}>
+            values={initialValues}
+            isSignedIn={true}>
         </NavBar>
         <HomeUserInfo
             values={initialValues}>
@@ -174,7 +175,10 @@ const Home = () => {
         {showTable && <UserList
             users={patients}>
         </UserList>}
-        <Templates></Templates>
+        <Templates>
+
+        </Templates>
+       
         <Footer>
 
         </Footer>
