@@ -10,21 +10,37 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 public class PatientRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
-    private Date created;
+    private String createdAt;
 
     @Column
     private boolean isLocked;
 
     @Column
-    private Date lastModified;
+    private String fileName;
 
     @Column
-    private Byte[] data;
+    private String lastModifiedAt;
+
+    @Lob
+    private byte[] data;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id", nullable = false, referencedColumnName = "id")
+    private Patient patient;
+
+    //check if smth breaks and delete
+    public PatientRecord() { }
+    public PatientRecord(String fileName, String createdAt, String lastModifiedAt, byte[] data, Patient patient) {
+        this.fileName = fileName;
+        this.createdAt = createdAt;
+        this.lastModifiedAt = lastModifiedAt;
+        this.data = data;
+        this.patient = patient;
+    }
 }
