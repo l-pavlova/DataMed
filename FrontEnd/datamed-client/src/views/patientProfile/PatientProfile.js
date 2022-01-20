@@ -5,7 +5,8 @@ import './PatientProfile.css';
 import avatar from "../../assets/patient.jpg";
 import { useLocation } from 'react-router-dom'
 import MedicalRecords from './MedicalRecords'
-
+import NavBar from '../navigation/NavBar';
+import Footer from '../navigation/Footer';
 const PatientProfile = ({
 
 }) => {
@@ -16,6 +17,8 @@ const PatientProfile = ({
     console.log('in patient profile');
 
     return (<div className='containerche'>
+        <NavBar>
+        </NavBar>
         <div className="main-body">
             <div className="row gutters-sm">
                 <div className="col-md-4 mb-3">
@@ -23,6 +26,11 @@ const PatientProfile = ({
                         <div className="card-body">
                             <div className="d-flex flex-column align-items-center text-center">
                                 <img src={avatar} alt="doc-avatar" className="doc-avatar" />
+                                {<div className="row" style={{paddingTop: 4 + 'px'}}>
+                                    <div className="col-sm-14">
+                                        <a className="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Add a profile pic</a>
+                                    </div>
+                                </div>}
                                 <div className="mt-3">
                                     <h4>  {patient.firstName || 'Bochka'}  {patient.lastName || 'Bochkova'}</h4>
                                 </div>
@@ -133,16 +141,18 @@ const PatientProfile = ({
                             </div>
                         </div>
                         <hr />
-                        {/* <div className="row">
+                        {<div className="row" style={{align: 'center'}}>
                             <div className="col-sm-14">
-                                <a className="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Add a n</a>
+                                <a className="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
                             </div>
-                        </div> */}
+                        </div>}
                     </div>
                 </div>
             </div>
         </div>
-        <MedicalRecords recs={patient.records} className="medical-records"></MedicalRecords>
+        <MedicalRecords recs={patient.records} className="medical-records">Your medical records in one place</MedicalRecords>
+        <Footer>
+        </Footer>
     </div>
     )
 }

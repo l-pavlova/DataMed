@@ -1,14 +1,15 @@
 import React from 'react'
-
+import { Button } from 'react-bootstrap';
+import './Templates.css'
 const Templates = ({ temps }) => {
 
     return (
-        <div>
-            <h6>Available tempaltes to fill for medical records:</h6>
+        <div className='templates-container'>
+            Available tempaltes to fill for medical records:
             <ul>
                 {
                     temps && temps.map(r => {
-                        <li>{r}</li>
+                        <li>{r} <Button>Fill</Button></li>
                     })
                 }
             </ul>

@@ -174,7 +174,7 @@ const Home = () => {
         {showTable && <UserList
             users={patients}>
         </UserList>}
-        <Templates className='container-tempaltes'></Templates>
+        <Templates></Templates>
         <Footer>
 
         </Footer>

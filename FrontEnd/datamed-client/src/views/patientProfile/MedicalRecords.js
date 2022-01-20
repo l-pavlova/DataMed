@@ -1,7 +1,7 @@
 import React from 'react'
 
 const MedicalRecords = ({ recs }) => {
-
+//todo: add link to record page
     return (
         <div>
             <ul>
