@@ -1,6 +1,7 @@
 package com.example.dataMed.controller;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,17 +54,16 @@ public class PatientController {
 //    }
 
     @GetMapping
-    public ResponseEntity<List<PatientDto>> getAllPatients() {
-        List<Patient> patients = patientService.getAll();
-        List<PatientDto> allPatientsData = patients.stream().map(modelMapper::mapToDto).collect(Collectors.toList());
-        return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<PatientDto>> getAllPatients(@RequestParam String firstName,
-                                                           @RequestParam String lastName,
-                                                           @RequestParam String egn) {
-        List<Patient> patients = patientService.filterStatements(firstName, lastName, egn);
+    public ResponseEntity<List<PatientDto>> getAllPatients(@RequestParam(required = false) String firstName,
+                                                           @RequestParam(required = false) String lastName,
+                                                           @RequestParam(required = false) String egn) {
+    	List<Patient> patients;
+    	if (firstName != null || lastName != null || egn != null) {
+    		patients = patientService.filterStatements(firstName, lastName, egn);    		
+    	} else {
+    		patients = patientService.getAll();
+    	}
+    	
         List<PatientDto> allPatientsData = patients.stream().map(modelMapper::mapToDto).collect(Collectors.toList());
         return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
     }

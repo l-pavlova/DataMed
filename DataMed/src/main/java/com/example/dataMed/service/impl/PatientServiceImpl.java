@@ -43,19 +43,19 @@ public class PatientServiceImpl implements PatientService {
         List<Patient> patients = new ArrayList<>();
 
         List<Patient> patientsByFirstName = new ArrayList<>();
-        if (firstName.length() != 0) {
+        if (firstName != null && firstName.length() != 0) {
             patientsByFirstName = patientRepository.findByFirstName(firstName);
             patients.addAll(patientsByFirstName);
         }
 
         List<Patient> patientsByLastName = new ArrayList<>();
-        if (lastName.length() != 0) {
+        if (lastName != null && lastName.length() != 0) {
             patientsByLastName = patientRepository.findByLastName(lastName);
             patients.addAll(patientsByLastName);
         }
 
         List<Patient> patientsByEgn = new ArrayList<>();
-        if (egn.length() != 0) {
+        if (egn != null && egn.length() != 0) {
             patientsByEgn = patientRepository.findByEgn(egn);
             patients.addAll(patientsByEgn);
         }
