@@ -2,8 +2,6 @@ package com.example.dataMed.service.impl;
 
 import com.example.dataMed.exceptions.FileStorageException;
 import com.example.dataMed.model.Doctor;
-import com.example.dataMed.model.Patient;
-import com.example.dataMed.model.PatientRecord;
 import com.example.dataMed.repository.DoctorRepository;
 import com.example.dataMed.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Service
@@ -53,6 +50,16 @@ public class DoctorServiceImpl implements DoctorService {
         }
         return new ResponseEntity<>("Your picture is uploaded successfully!",
                 HttpStatus.CREATED);
+    }
+
+    @Override
+    public Doctor updateDoctor(int id, Doctor doctor) {
+        if (doctor.getPassword() != null) {
+            return  doctorRepository.save(doctor);
+        }
+        String currPass = doctorRepository.getById(id).getPassword();
+        doctor.setPassword(currPass);
+        return  doctorRepository.save(doctor);
     }
 
 }

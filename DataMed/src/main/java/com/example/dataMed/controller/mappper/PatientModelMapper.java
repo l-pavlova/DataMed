@@ -17,7 +17,12 @@ public class PatientModelMapper {
 		patient.setPassword(passwordEncoder.encode(patientDto.getPassword()));
 		return patient;
 	}
-	
+
+	public Patient mapFromDtoNullAsPass(PatientDto patientDto) {
+		return this.modelMapper.map(patientDto, Patient.class);
+	}
+
+
 	public PatientDto mapToDto(Patient patient) {
 		return this.modelMapper.map(patient, PatientDto.class);
 	}
