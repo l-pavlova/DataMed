@@ -42,8 +42,8 @@ public class DoctorController {
         return new ResponseEntity<>(allDoctorsData, HttpStatus.OK);
     }
 
-    @PatchMapping
-    public ResponseEntity<?> addProfilePicture(@RequestParam("id") Integer id,
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> addProfilePicture(@PathVariable int id,
                                                              @RequestParam("picture") MultipartFile picture) {
 
         return doctorService.addProfilePicture(id, picture);
