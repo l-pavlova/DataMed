@@ -1,4 +1,4 @@
-package com.example.dataMed;
+package com.example.dataMed.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
