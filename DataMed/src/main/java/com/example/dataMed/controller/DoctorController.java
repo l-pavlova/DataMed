@@ -49,7 +49,7 @@ public class DoctorController {
         return doctorService.addProfilePicture(id, picture);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<DoctorDto> updateDoctor(@PathVariable int id, @RequestBody DoctorDto doctorDto) {
         Doctor newDoctor = doctorDto.getPassword() == null ?
                 modelMapper.mapFromDtoNullAsPass(doctorDto) : modelMapper.mapFromDto(doctorDto);
