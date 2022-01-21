@@ -36,7 +36,7 @@ public class PatientController {
         return new ResponseEntity<>(modelMapper.mapToDto(createdPatient), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<PatientDto> updatePatient(@PathVariable int id, @RequestBody PatientDto patientDto) {
         Patient newPatient = patientDto.getPassword() == null ?
                 modelMapper.mapFromDtoNullAsPass(patientDto) : modelMapper.mapFromDto(patientDto);
@@ -52,14 +52,14 @@ public class PatientController {
 //        return new ResponseEntity<>(this.modelMapper.map(doctor, DoctorDto.class), HttpStatus.OK);
 //    }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<PatientDto>> getAllPatients() {
         List<Patient> patients = patientService.getAll();
         List<PatientDto> allPatientsData = patients.stream().map(modelMapper::mapToDto).collect(Collectors.toList());
         return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
     }
 
-    @GetMapping("/find")
+    @GetMapping
     public ResponseEntity<List<PatientDto>> getAllPatients(@RequestParam String firstName,
                                                            @RequestParam String lastName,
                                                            @RequestParam String egn) {
@@ -68,8 +68,8 @@ public class PatientController {
         return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
     }
 
-    @PostMapping("/addProfilePic")
-    public ResponseEntity addProfilePicture(@RequestParam("id") Integer id,
+    @PatchMapping
+    public ResponseEntity<?> addProfilePicture(@RequestParam("id") Integer id,
                                             @RequestParam("picture") MultipartFile picture) {
 
         return patientService.addProfilePicture(id, picture);

@@ -35,15 +35,15 @@ public class DoctorController {
         return new ResponseEntity<>(modelMapper.mapToDto(createdDoctor), HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<DoctorDto>> getAllDoctors() {
         List<Doctor> doctors = doctorService.getAll();
         List<DoctorDto> allDoctorsData = doctors.stream().map(this.modelMapper::mapToDto).collect(Collectors.toList());
         return new ResponseEntity<>(allDoctorsData, HttpStatus.OK);
     }
 
-    @PostMapping("/addProfilePic")
-    public ResponseEntity addProfilePicture(@RequestParam("id") Integer id,
+    @PatchMapping
+    public ResponseEntity<?> addProfilePicture(@RequestParam("id") Integer id,
                                                              @RequestParam("picture") MultipartFile picture) {
 
         return doctorService.addProfilePicture(id, picture);
