@@ -10,6 +10,8 @@ const recordsService = {
     addProfilePicDoc: async (formData, patientId) => await requester(api.uploadDocPic(patientId)).createWithFile(formData),
     addMultipleRecords: async (formData, patientId) => await requester(api.addMultipleRecords(patientId)).createWithFile(formData),
     addTemplate: async (formData) => await requester(api.addTemplate()).createWithFile(formData),
+    downloadTemplate: (name) => requester(api.downloadTemplate(name)).get(),
+    downloadRecord: (name, id) => requester(api.downloadRecord(name, id)).getBlob(),
 }
 
 export default recordsService;

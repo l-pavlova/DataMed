@@ -64,8 +64,9 @@ public class PatientRecordController {
         ByteArrayResource resource = new ByteArrayResource(record.getData());
 
         return ResponseEntity.ok()
+                .header("content-disposition", "attachment;filename=" + filename.toString())
                 .contentLength(resource.contentLength())
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .contentType(MediaType.APPLICATION_PDF)
                 .body(resource);
     }
 }

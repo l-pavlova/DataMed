@@ -32,10 +32,10 @@ public class PatientRecordImpl implements PatientRecordService {
     public ResponseEntity addRecord(Integer id, MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
-        if (!fileName.contains("pdf")) {
+        /*if (!fileName.contains("pdf")) {
             return new ResponseEntity<>("File is not pdf type",
                     HttpStatus.UNSUPPORTED_MEDIA_TYPE);
-        }
+        }*/
 
         try {
             Patient patient = patientRepository.getById(id);

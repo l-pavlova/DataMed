@@ -17,6 +17,10 @@ const api = {
     addMultipleRecords: patientId => `/patient-records/uploadMultipleFiles?id=${patientId}`,
     getRecords: patientId => `/patient-records/records?id=${patientId}`,
     getRecord: patientId => `/patient-records/record?id=${patientId}`,
+    downloadRecord: (filename,id) => `/patient-records/download?filename=${filename}&id=${id}`,
+
+    //templateController
+    downloadTemplate: (filename) => `/template/download?filename=${filename}`,
 }
 
 export default api;
