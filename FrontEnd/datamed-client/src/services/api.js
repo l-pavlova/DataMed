@@ -4,7 +4,7 @@ const api = {
     getPatientById: id => `/patients/${id}`,
     registerDoc: () => `/doctors`,
     registerPatient: () => `/patients`,
-    findPatients: (firstName, lastName, egn) => `/patients/find?firstName=${firstName}&lastName=${lastName}&egn=${egn}`,
+    findPatients: (firstName, lastName, egn) => `/patients?firstName=${firstName}&lastName=${lastName}&egn=${egn}`,
     logginUser: () => `/login`,
     updateUser: () => `/user`,
     uploadPatientPic: (id) => `/patients${id}`,
