@@ -102,11 +102,13 @@ public class PatientServiceImpl implements PatientService {
         patient.setImage(curr.getImage());
 
         if (patient.getPassword() != null) {
-            return  patientRepository.save(patient);
+            patientRepository.save(patient);
+            return patient;
         }
 
         String currPass = patientRepository.getById(id).getPassword();
         patient.setPassword(currPass);
-        return patientRepository.save(patient);
+        patientRepository.save(patient);
+        return patient;
     }
 }
