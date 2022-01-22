@@ -6,9 +6,9 @@ import recordsService from '../../services/recordsService'
 const MedicalRecords = ({ recs, isDoc, id }) => {
     //todo: add link to record page
     //todo: add refresh of docs upon adding a new one
-    const [recordsSize, setRecordsSize] = useState(recs.length);
+    const [records, setRecords] = useState(recs);
     const initialValues = recs.map((rec, index) =>
-        <li key={index}  className="list-group-item" >
+        <li key={index} className="list-group-item list-group-item-action" >
             {rec.fileName ? rec.fileName : rec.name}
         </li>);
     const [listItems, setListItems] = useState(initialValues
@@ -16,8 +16,8 @@ const MedicalRecords = ({ recs, isDoc, id }) => {
 
 
     const getItems = useCallback(() => {
-        return recs
-    }, [recs]);
+        return records
+    }, [records]);
 
     const List = ({ getItems }) => {
         const [items, setItems] = useState([]);
@@ -27,7 +27,7 @@ const MedicalRecords = ({ recs, isDoc, id }) => {
         }, [getItems])
 
         return items.map((rec, index) =>
-            <li key={index}  className="list-group-item">
+            <li key={index} className="list-group-item list-group-item-action">
                 {rec.fileName ? rec.fileName : rec.name}
             </li>)
     }
@@ -37,13 +37,13 @@ const MedicalRecords = ({ recs, isDoc, id }) => {
         formData.append('file', file);
         recordsService.addRecord(formData, id);
         recs.push({ file: file });
-        setListItems(recs.map((rec, index) =>
-            <li key={index}>
-                {rec.fileName ? rec.fileName : rec.name}
-            </li>));
+        setRecords(recs);
+        /*  setListItems(recs.map((rec, index) =>
+              <li key={index}>
+                  {rec.fileName ? rec.fileName : rec.name}
+              </li>));*/
     }
 
-    console.log(listItems);
     return (
         <div className='rec-containter'>
             <h2>{isDoc ? "Patient's medical records in one place" : "Your medical records in one place"}</h2>
@@ -51,7 +51,7 @@ const MedicalRecords = ({ recs, isDoc, id }) => {
                 <List getItems={getItems}></List>
                 <FileUploader handleFileUpload={handleUploadRecord} text="Add more records"></FileUploader>
             </ul>
-          
+
         </div>
     );
 
