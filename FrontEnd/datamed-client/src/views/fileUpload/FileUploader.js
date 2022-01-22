@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import { Button } from 'react-bootstrap'
 
 
-const FileUploader = (handleFileUpload) => {
+const FileUploader = ({handleFileUpload, text}) => {
     const hiddenFileInput = React.useRef(null);
 
+    const [btnText, setButtonText] = useState( text || "Upload a file");
+    
     const handleClick = event => {
         hiddenFileInput.current.click();
     };
@@ -16,8 +18,8 @@ const FileUploader = (handleFileUpload) => {
     };
     return (
         <>
-            <Button onClick={handleClick}>
-                Upload a file
+            <Button onClick={handleClick} style={{ paddingTop: 4 + 'px' }}>
+                {btnText}
             </Button>
             <input
                 type="file"
