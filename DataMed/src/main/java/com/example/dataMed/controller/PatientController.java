@@ -79,7 +79,9 @@ public class PatientController {
     public ResponseEntity<?> addProfilePicture(@PathVariable int id,
                                             @RequestParam("picture") MultipartFile picture) {
 
-        return patientService.addProfilePicture(id, picture);
+        patientService.addProfilePicture(id, picture);
+        return new ResponseEntity<>("Your picture is uploaded successfully!",
+                HttpStatus.CREATED);
     }
 
 }

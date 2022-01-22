@@ -1,22 +1,22 @@
 package com.example.dataMed.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.example.dataMed.dto.PatientRecordDto;
 import com.example.dataMed.model.PatientRecord;
 import com.example.dataMed.service.PatientRecordService;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @RequestMapping(value = "/patient-records")
 @RestController
@@ -26,34 +26,19 @@ public class PatientRecordController {
     @Autowired
     private PatientRecordService patientRecordService;
 
-    @PostMapping ("/uploadFile")
-    public ResponseEntity addPatientRecord(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id) {
-        return patientRecordService.addRecord(id, file);
+    @PostMapping
+    public ResponseEntity<String> addPatientRecord(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id) {
+        patientRecordService.addRecord(id, file);
+        return new ResponseEntity<>("Your picture is uploaded successfully!",
+                HttpStatus.CREATED);
     }
 
-    @PostMapping("/uploadMultipleFiles")
-    public List<ResponseEntity<PatientRecordDto>> addMultipleRecords(@RequestParam("files") MultipartFile[] files,
-                                                                     @RequestParam("id") Integer id) {
-        List<ResponseEntity<PatientRecordDto>> responseEntities = new ArrayList<>();
-        for (MultipartFile file : files) {
-            responseEntities.add(addPatientRecord(file, id));
-        }
-        return responseEntities;
-    }
+    @GetMapping
+    public ResponseEntity<List<PatientRecordDto>> getPatientRecords(@RequestParam("id") Integer id,
+                                                             @RequestParam(required = false) String filename) {
+        List<PatientRecord> records = patientRecordService.getPatientRecords(id, filename);
 
-    @GetMapping("/records")
-    public ResponseEntity<List<PatientRecordDto>> getPatientRecords(@RequestParam("id") Integer id) {
-        List<PatientRecord> records = patientRecordService.getPatientRecords(id);
-        List<PatientRecordDto> allPatientRecords = Arrays.asList(modelMapper.map(records, PatientRecordDto[].class));
-
-        return new ResponseEntity<>(allPatientRecords, HttpStatus.OK);
-    }
-
-    @GetMapping("/record")
-    public ResponseEntity<PatientRecordDto> getPatientRecord(@RequestParam("id") Integer id,
-                                                             @RequestParam("filename") String filename) {
-        PatientRecord record = patientRecordService.getPatientRecord(id, filename);
-
-        return new ResponseEntity<>(modelMapper.map(record, PatientRecordDto.class), HttpStatus.OK);
+        return new ResponseEntity<>(records.stream().map(record -> modelMapper.map(records, PatientRecordDto.class)).collect(Collectors.toList()), 
+        		HttpStatus.OK);
     }
 }

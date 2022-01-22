@@ -43,10 +43,12 @@ public class DoctorController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> addProfilePicture(@PathVariable int id,
+    public ResponseEntity<String> addProfilePicture(@PathVariable int id,
                                                              @RequestParam("picture") MultipartFile picture) {
 
-        return doctorService.addProfilePicture(id, picture);
+        doctorService.addProfilePicture(id, picture);
+        return new ResponseEntity<>("Your picture is uploaded successfully!",
+                HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
