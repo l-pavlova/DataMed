@@ -3,13 +3,13 @@ const api = {
     getUser: userName => `/users/${userName}`,
     getPatientById: id => `/patients/${id}`,
     registerDoc: () => `/doctors`,
+    updateDoc: id => `doctors/update/${id}`,
+    updatePatient: id => `patients/update/${id}`,
     registerPatient: () => `/patients`,
     findPatients: (firstName, lastName, egn) => `/patients/find?firstName=${firstName}&lastName=${lastName}&egn=${egn}`,
     logginUser: () => `/users/login`,
     updateUser: () => `/user/update`,
     uploadPatientPic: (id) => `/patients/addProfilePic?id=${id}`,
-    //uploadPatientPic: (id) => `/patients/addProfilePic`,
-    /*uploadPatientPic: (id,formData) => `/patients/addProfilePic?id=${id}&picture${formData}`,*/
     uploadDocPic: (id) => `/doctors/addProfilePic?id=${id}`,
 
     //medicalRecordController

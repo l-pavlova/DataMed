@@ -20,135 +20,135 @@ const Home = () => {
     }, [patients])
 
 
-    const testValues = [
-        {
-            "id": 1,
-            "username": "tosho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 2,
-            "username": "gosho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        }
-        , {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        }, {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-
-
-    ];
+    /* const testValues = [
+         {
+             "id": 1,
+             "username": "tosho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         },
+         {
+             "id": 2,
+             "username": "gosho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         },
+         {
+             "id": 3,
+             "username": "josho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         },
+         {
+             "id": 3,
+             "username": "josho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         },
+         {
+             "id": 3,
+             "username": "josho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         }
+         , {
+             "id": 3,
+             "username": "josho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         },
+         {
+             "id": 3,
+             "username": "josho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         }, {
+             "id": 3,
+             "username": "josho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         },
+         {
+             "id": 3,
+             "username": "josho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         },
+         {
+             "id": 3,
+             "username": "josho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         },
+         {
+             "id": 3,
+             "username": "josho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         },
+         {
+             "id": 3,
+             "username": "josho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         },
+         {
+             "id": 3,
+             "username": "josho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         },
+         {
+             "id": 3,
+             "username": "josho",
+             "age": 0,
+             "email": "gosho",
+             "records": [],
+             "height": 0.0,
+             "weight": 0.0
+         },
+ 
+ 
+     ];*/
 
     const handleFindPatients = async (name, lastName, egn) => {
         console.log('in');
@@ -157,9 +157,6 @@ const Home = () => {
             console.log(pats);
             setPatients(pats)
         });
-
-        //await userService.register(userData);
-
     };
 
 
@@ -179,7 +176,7 @@ const Home = () => {
         <Templates>
 
         </Templates>
-       
+
         <Footer>
 
         </Footer>

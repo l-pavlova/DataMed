@@ -9,6 +9,7 @@ import Footer from '../navigation/Footer';
 import FileUploader from '../fileUpload/FileUploader';
 import recordsService from '../../services/recordsService';
 import arrayBufferToBase64 from '../../utils/imgStringConverter';
+import ProfileEditor from './ProfileEditor';
 
 const PatientProfile = ({
 }) => {
@@ -25,12 +26,17 @@ const PatientProfile = ({
     }
     console.log(patient.records);
 
+    const [edit, setEdit] = useState(false);
 
     const handleFileUpload = (file) => {
         let formData = new FormData();
         formData.append('picture', file);
         recordsService.addProfilePicPatient(formData, patient.id);
     }
+
+   /* const handleSubmit = () =>{
+        setEdit(false);
+    }*/
 
     return (<div className='containerche'>
         <NavBar>
@@ -51,7 +57,7 @@ const PatientProfile = ({
                     </div>
                 </div>
             </div>
-            <div className="col-md-8">
+             <div className="col-md-8">
                 <div className="card mb-3">
                     <div className="card-body">
                         <div className="row">
@@ -155,19 +161,19 @@ const PatientProfile = ({
                         <hr />
                         {<div className="row" style={{ align: 'center' }}>
                             <div className="col-sm-14">
-                                <a className="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                                <a className="btn btn-info " onClick={setEdit(true)}>Edit</a>
                             </div>
                         </div>}
                     </div>
                 </div>
             </div>
         </div>
-        <MedicalRecords recs={patient.records} isDoc={isDoc}  id={patient.id} className="medical-records"></MedicalRecords>
-        
+        <MedicalRecords recs={patient.records} isDoc={isDoc} id={patient.id} className="medical-records"></MedicalRecords>
+
         <Footer>
         </Footer>
     </div>
-    
+
     )
 }
 
