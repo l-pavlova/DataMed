@@ -96,11 +96,17 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient updatePatient(int id, Patient patient) {
+        Patient curr = patientRepository.getById(id);
+        patient.setRecords(curr.getRecords());
+        patient.setUsername(curr.getUsername());
+        patient.setImage(curr.getImage());
+
         if (patient.getPassword() != null) {
             return  patientRepository.save(patient);
         }
+
         String currPass = patientRepository.getById(id).getPassword();
         patient.setPassword(currPass);
-        return  patientRepository.save(patient);
+        return patientRepository.save(patient);
     }
 }
