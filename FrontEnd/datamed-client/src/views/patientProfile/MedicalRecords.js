@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import "./MedicalRecords.css"
 import FileUploader from '../fileUpload/FileUploader'
 import recordsService from '../../services/recordsService'
-
+import { Link } from 'react-router-dom'
 const MedicalRecords = ({ recs, isDoc, id }) => {
     //todo: add link to record page
     //todo: add refresh of docs upon adding a new one
@@ -14,6 +14,10 @@ const MedicalRecords = ({ recs, isDoc, id }) => {
     const [listItems, setListItems] = useState(initialValues
     );
 
+    function openfile(file) {
+        console.log(file);
+        window.location = "http://localhost:3000/" + file;
+    }
 
     const getItems = useCallback(() => {
         return records
@@ -27,8 +31,10 @@ const MedicalRecords = ({ recs, isDoc, id }) => {
         }, [getItems])
 
         return items.map((rec, index) =>
+
             <li key={index} className="list-group-item list-group-item-action">
-                {rec.fileName ? rec.fileName : rec.name}
+                <Link to={`/document`} state={{ document: rec }} >{rec.fileName ? rec.fileName : rec.name}</Link>
+
             </li>)
     }
 
