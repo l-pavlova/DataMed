@@ -93,4 +93,14 @@ public class PatientServiceImpl implements PatientService {
         return new ResponseEntity<>("Your picture is uploaded successfully!",
                 HttpStatus.CREATED);
     }
+
+    @Override
+    public Patient updatePatient(int id, Patient patient) {
+        if (patient.getPassword() != null) {
+            return  patientRepository.save(patient);
+        }
+        String currPass = patientRepository.getById(id).getPassword();
+        patient.setPassword(currPass);
+        return  patientRepository.save(patient);
+    }
 }

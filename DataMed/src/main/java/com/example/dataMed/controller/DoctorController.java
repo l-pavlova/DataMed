@@ -49,4 +49,15 @@ public class DoctorController {
         return doctorService.addProfilePicture(id, picture);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<DoctorDto> updateDoctor(@PathVariable int id, @RequestBody DoctorDto doctorDto) {
+        Doctor newDoctor = doctorDto.getPassword() == null ?
+                modelMapper.mapFromDtoNullAsPass(doctorDto) : modelMapper.mapFromDto(doctorDto);
+        Doctor updated = doctorService.updateDoctor(id, newDoctor);
+
+        return new ResponseEntity<>(this.modelMapper.mapToDto(updated), HttpStatus.OK);
+    }
+
+
+
 }

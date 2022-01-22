@@ -36,6 +36,16 @@ public class PatientController {
         return new ResponseEntity<>(modelMapper.mapToDto(createdPatient), HttpStatus.CREATED);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<PatientDto> updatePatient(@PathVariable int id, @RequestBody PatientDto patientDto) {
+        Patient newPatient = patientDto.getPassword() == null ?
+                modelMapper.mapFromDtoNullAsPass(patientDto) : modelMapper.mapFromDto(patientDto);
+        Patient updated = patientService.updatePatient(id, newPatient);
+
+        return new ResponseEntity<>(this.modelMapper.mapToDto(updated), HttpStatus.OK);
+    }
+
+
 //    @GetMapping
 //    public ResponseEntity<PatientDto> searchPatient(@RequestBody PatientDto) {
 //        Doctor doctor = patientService.searchPateints(PatientDto);

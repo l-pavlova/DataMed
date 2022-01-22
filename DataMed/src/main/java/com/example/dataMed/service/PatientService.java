@@ -17,4 +17,6 @@ public interface PatientService {
     List<Patient> filterStatements(String firstName, String lastName, String egn);
 
     ResponseEntity addProfilePicture(Integer id, MultipartFile picture);
+
+    Patient updatePatient(int id, Patient newPatient);
 }

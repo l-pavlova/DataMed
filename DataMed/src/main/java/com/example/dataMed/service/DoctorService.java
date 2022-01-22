@@ -18,4 +18,6 @@ public interface DoctorService {
     List<Doctor> getAll();
 
     ResponseEntity addProfilePicture(Integer id, MultipartFile picture);
+
+    Doctor updateDoctor(int id, Doctor doctor);
 }
