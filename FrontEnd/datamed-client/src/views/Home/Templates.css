@@ -1,0 +1,11 @@
+.templates-container {
+    position: absolute;
+    left: 74%;
+    top: 10%;
+    color: gray;
+    font-family: sans-serif;
+    font-weight: 50;
+    font-size: 18px;
+    box-shadow: 1px;
+    box-sizing: border-box;
+}

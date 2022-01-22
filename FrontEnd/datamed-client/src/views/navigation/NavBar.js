@@ -14,13 +14,9 @@ const NavBar = ({ values, isSignedIn=false }) => {
                         Signed in as: <a href="#login">{values.username || "default"}</a>
                     </Navbar.Text>}
                 </Navbar.Collapse>
-                <Nav.Link href="#">Logout</Nav.Link>
+                {isSignedIn &&<Nav.Link href="#">Logout</Nav.Link>}
             </Container>
         </Navbar>)
 }
 
 export default NavBar;
-
-/*
-  
-*/

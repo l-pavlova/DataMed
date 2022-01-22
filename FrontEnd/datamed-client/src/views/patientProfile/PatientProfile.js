@@ -1,28 +1,48 @@
 
-import React from 'react';
-
+import React, { useState } from 'react';
 import './PatientProfile.css';
 import avatar from "../../assets/patient.jpg";
 import { useLocation } from 'react-router-dom'
 import MedicalRecords from './MedicalRecords'
+import NavBar from '../navigation/NavBar';
+import Footer from '../navigation/Footer';
+import FileUploader from '../fileUpload/FileUploader';
+import recordsService from '../../services/recordsService';
+import arrayBufferToBase64 from '../../utils/imgStringConverter';
 
 const PatientProfile = ({
-
 }) => {
 
     const location = useLocation()
-    const { patient } = location.state;
+    const { patient, isDoc } = location.state;
     console.log(patient);
-    console.log('in patient profile');
+
+    let image = avatar;
+    if (patient.image) {
+        let base64String = arrayBufferToBase64(patient.image)
+        const base64Image = 'data:image/png;base64,'.concat(base64String);
+        image = base64Image;
+    }
+    console.log(patient.records);
+
+
+    const handleFileUpload = (file) => {
+        let formData = new FormData();
+        formData.append('picture', file);
+        recordsService.addProfilePicPatient(formData, patient.id);
+    }
 
     return (<div className='containerche'>
+        <NavBar>
+        </NavBar>
         <div className="main-body">
             <div className="row gutters-sm">
                 <div className="col-md-4 mb-3">
                     <div className="card">
                         <div className="card-body">
                             <div className="d-flex flex-column align-items-center text-center">
-                                <img src={avatar} alt="doc-avatar" className="doc-avatar" />
+                                <img width="250" src={image} />
+                                <FileUploader handleFileUpload={handleFileUpload} text="Change profile pic"></FileUploader>
                                 <div className="mt-3">
                                     <h4>  {patient.firstName || 'Bochka'}  {patient.lastName || 'Bochkova'}</h4>
                                 </div>
@@ -133,17 +153,21 @@ const PatientProfile = ({
                             </div>
                         </div>
                         <hr />
-                        {/* <div className="row">
+                        {<div className="row" style={{ align: 'center' }}>
                             <div className="col-sm-14">
-                                <a className="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Add a n</a>
+                                <a className="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
                             </div>
-                        </div> */}
+                        </div>}
                     </div>
                 </div>
             </div>
         </div>
-        <MedicalRecords recs={patient.records} className="medical-records"></MedicalRecords>
+        <MedicalRecords recs={patient.records} isDoc={isDoc}  id={patient.id} className="medical-records"></MedicalRecords>
+        
+        <Footer>
+        </Footer>
     </div>
+    
     )
 }
 
