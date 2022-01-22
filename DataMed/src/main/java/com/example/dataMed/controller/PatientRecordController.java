@@ -1,19 +1,18 @@
 package com.example.dataMed.controller;
 
 import com.example.dataMed.dto.PatientRecordDto;
+import com.example.dataMed.model.MedicalTemplate;
 import com.example.dataMed.model.PatientRecord;
 import com.example.dataMed.service.PatientRecordService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,5 +54,18 @@ public class PatientRecordController {
         PatientRecord record = patientRecordService.getPatientRecord(id, filename);
 
         return new ResponseEntity<>(modelMapper.map(record, PatientRecordDto.class), HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/download", method = RequestMethod.GET)
+    public ResponseEntity<ByteArrayResource> download(@RequestParam("filename") String filename,
+                                                      @RequestParam("id") Integer id ) {
+
+        PatientRecord record = patientRecordService.getPatientRecord(id, filename);
+        ByteArrayResource resource = new ByteArrayResource(record.getData());
+
+        return ResponseEntity.ok()
+                .contentLength(resource.contentLength())
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
     }
 }
