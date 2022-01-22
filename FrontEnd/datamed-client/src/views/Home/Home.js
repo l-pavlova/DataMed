@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import HomeUserInfo from './HomeUserInfo';
 import NavBar from '../navigation/NavBar';
-//import SearchPage from './SearchBar';
 import { SearchBar } from './SearchBar';
 import Footer from '../navigation/Footer';
 import UserList from './UserList';
 import { findPatients } from '../../utils/userFilters';
+import Templates from './TemplateList';
+
 const Home = () => {
 
     const initialValues = { firstName: '', lastName: '', age: '', phoneNumber: '', email: '', username: '', position: '', medicalUnit: '', hospital: '', certifications: '', password: '' };
@@ -156,7 +157,7 @@ const Home = () => {
             console.log(pats);
             setPatients(pats)
         });
-       
+
         //await userService.register(userData);
 
     };
@@ -164,7 +165,8 @@ const Home = () => {
 
     return (<div>
         <NavBar
-            values={initialValues}>
+            values={initialValues}
+            isSignedIn={true}>
         </NavBar>
         <HomeUserInfo
             values={initialValues}>
@@ -174,7 +176,12 @@ const Home = () => {
         {showTable && <UserList
             users={patients}>
         </UserList>}
+        <Templates>
+
+        </Templates>
+       
         <Footer>
+
         </Footer>
     </div>);
 }

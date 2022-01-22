@@ -16,11 +16,13 @@ const initRequest = async (contentType, method, body) => {
         headers: {
             ...(contentType && { "Content-Type": contentType })
         },
-        body
+        body: body
     }
 };
 
 const initBaseRequest = initRequest.bind(null, "application/json");
+
+const initFileSendRequest = initRequest.bind(null, null);//no headers
 
 const responseHandler = async res => {
     if (!res.ok) {
@@ -42,6 +44,7 @@ const responseHandler = async res => {
 const requester = (endpoint) => ({
     get: () => initBaseRequest('GET').then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
     create: data => initBaseRequest('POST', JSON.stringify(data)).then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
+    createWithFile: data => initFileSendRequest('POST', data).then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
     update: data => initBaseRequest('PUT', JSON.stringify(data)).then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
     delete: () => initBaseRequest('DELETE').then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
 })

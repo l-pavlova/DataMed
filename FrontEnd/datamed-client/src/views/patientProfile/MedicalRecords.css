@@ -1,0 +1,30 @@
+.rec-containter {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    color: #1a202c;
+    font-family: sans-serif;
+    font-weight: 50;
+    font-size: 25px;
+    box-shadow: 2px;
+}
+
+.list-items {
+    display: block;
+    color: rgb(49, 49, 49);
+    font-size: 25px;
+}
+
+li {
+    color: #1a202c;
+}
+
+li:hover {
+    text-decoration: underline;
+}
+
+h2{
+    padding-left: 13rem;
+    padding-bottom: 1rem;
+}
+
