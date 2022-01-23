@@ -68,4 +68,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         registration.addUrlPatterns("/patient-records/*");
         return registration;
 	}
+	
+	@Bean
+	public FilterRegistrationBean<MedicalTemplatesEndpointFilter> medicalTemplatesEndpointFilter() {
+		FilterRegistrationBean<MedicalTemplatesEndpointFilter> registration = new FilterRegistrationBean<>();
+		MedicalTemplatesEndpointFilter doctorsEndpointFilter = new MedicalTemplatesEndpointFilter();
+        beanFactory.autowireBean(doctorsEndpointFilter);
+        registration.setFilter(doctorsEndpointFilter);
+        registration.addUrlPatterns("/templates/*");
+        return registration;
+	}
 }

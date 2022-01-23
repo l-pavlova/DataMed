@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
-public class PatientRecordsEndpointFilter implements Filter {
+public class MedicalTemplatesEndpointFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		
+	
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse= (HttpServletResponse) response;
 		
@@ -31,15 +31,12 @@ public class PatientRecordsEndpointFilter implements Filter {
 			chain.doFilter(request, response);
 			return;
 		}
-		
+				
 		String method = httpRequest.getMethod();
-		String patientId = httpRequest.getUserPrincipal().getName();
-		String requestPatientId = httpRequest.getParameter("id");
 		
 		if (HttpMethod.GET.toString().equals(method)) {
-			if (patientId.equals(requestPatientId)) {
-				chain.doFilter(request, response);
-			}
+			chain.doFilter(request, response);
+			return;
 		}
 			
 		httpResponse.sendError(HttpStatus.FORBIDDEN.value());
