@@ -39,7 +39,7 @@ public class PatientController {
     }
 
     @PostMapping
-    public ResponseEntity createPatient(@RequestBody PatientDto patientDto) {
+    public ResponseEntity<?> createPatient(@RequestBody PatientDto patientDto) {
         Boolean isValid = EmailValidator.isEmailValid(patientDto.getEmail());
         if (!isValid) {
             return new ResponseEntity<>("Email is not valid", HttpStatus.UNAUTHORIZED);
