@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name="template")
+@Table(uniqueConstraints= @UniqueConstraint(columnNames={"file_name"}))
 public class MedicalTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class MedicalTemplate {
     @Column
     private String createdAt;
 
-    @Column
+    @Column(name = "file_name")
     private String fileName;
 
     @Lob

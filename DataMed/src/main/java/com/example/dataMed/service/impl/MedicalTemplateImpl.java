@@ -40,10 +40,12 @@ public class MedicalTemplateImpl implements MedicalTemplateService {
             MedicalTemplate newTemplate = new MedicalTemplate(template.getName(),
                     formatter.format(date),
                     Files.readAllBytes(template.toPath()));
-            medicalTemplates.add(newTemplate);
-            medicalTemplateRepository.save(newTemplate);
+           if (medicalTemplateRepository.findByFileName(template.getName()) == null){
+               medicalTemplates.add(newTemplate);
+               medicalTemplateRepository.save(newTemplate);
+           }
         }
-        return medicalTemplates;
+        return medicalTemplateRepository.findAll();
     }
 
     @Override
@@ -55,9 +57,10 @@ public class MedicalTemplateImpl implements MedicalTemplateService {
     public void addTemplate(MultipartFile template) {
         String fileName = StringUtils.cleanPath(template.getOriginalFilename());
         try {
-            MedicalTemplate newTemplate = new MedicalTemplate(fileName, formatter.format(date), template.getBytes());
-            medicalTemplateRepository.save(newTemplate);
-
+            if (medicalTemplateRepository.findByFileName(template.getName()) == null){
+                MedicalTemplate newTemplate = new MedicalTemplate(fileName, formatter.format(date), template.getBytes());
+                medicalTemplateRepository.save(newTemplate);
+            }
         } catch (IOException e) {
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", e);
         }
