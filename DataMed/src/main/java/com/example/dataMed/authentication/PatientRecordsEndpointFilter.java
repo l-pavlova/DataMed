@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
-public class PatientsEndpointFilter implements Filter {
+public class PatientRecordsEndpointFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse= (HttpServletResponse) response;
 		
@@ -29,23 +30,15 @@ public class PatientsEndpointFilter implements Filter {
 		String method = httpRequest.getMethod();
 
 		if (httpRequest.isUserInRole("ROLE_DOCTOR")) {
-			if (HttpMethod.PATCH.toString().equals(method)) {
-				httpResponse.sendError(HttpStatus.FORBIDDEN.value());
-				return;
-			}
-			
 			chain.doFilter(request, response);
 			return;
 		}
 		
 		String patientId = httpRequest.getUserPrincipal().getName();
-		String[] path = httpRequest.getServletPath().split("/");
-		String lastDirectory = path[path.length - 1];
+		String requestPatientId = httpRequest.getParameter("id");
 		
-		if (HttpMethod.GET.toString().equals(method) 
-				|| HttpMethod.PUT.toString().equals(method) 
-				|| HttpMethod.PATCH.toString().equals(method)) {
-			if (patientId.equals(lastDirectory)) {
+		if (HttpMethod.GET.toString().equals(method)) {
+			if (patientId.equals(requestPatientId)) {
 				chain.doFilter(request, response);
 			}
 		}
