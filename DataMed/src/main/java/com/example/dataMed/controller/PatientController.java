@@ -30,7 +30,8 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-    private PatientModelMapper modelMapper = new PatientModelMapper();
+    @Autowired
+    private PatientModelMapper modelMapper;
 
     @GetMapping("/{id}")
     public ResponseEntity<PatientDto> getPatient(@PathVariable Integer id) {
