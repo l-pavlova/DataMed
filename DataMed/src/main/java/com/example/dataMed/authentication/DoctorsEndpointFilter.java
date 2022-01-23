@@ -1,32 +1,53 @@
-//package com.example.dataMed.authentication;
-//
-//import java.io.IOException;
-//
-//import javax.servlet.Filter;
-//import javax.servlet.FilterChain;
-//import javax.servlet.ServletException;
-//import javax.servlet.ServletRequest;
-//import javax.servlet.ServletResponse;
-//import javax.servlet.http.HttpServletRequest;
-//
-//import org.springframework.http.HttpMethod;
-//
-//public class DoctorsEndpointFilter implements Filter {
-//
-//	@Override
-//	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-//			throws IOException, ServletException {
-//		HttpServletRequest httpRequest = (HttpServletRequest) request;
-//		
-//		if (httpRequest.isUserInRole("ADMIN")) {
-//			return;
-//		}
-//		
-//		String method = httpRequest.getMethod();
-//		
-//		if (method.equals(HttpMethod.))
-//		
-//		
-//	}
-//
-//}
+package com.example.dataMed.authentication;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+
+@Component
+public class DoctorsEndpointFilter implements Filter {
+
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse= (HttpServletResponse) response;
+		
+		if (httpRequest.isUserInRole("ROLE_ADMIN")) {
+			chain.doFilter(request, response);
+			return;
+		}
+		
+		if (httpRequest.isUserInRole("ROLE_PATIENT")) {
+			httpResponse.sendError(HttpStatus.FORBIDDEN.value());
+			return;
+		}
+		
+		String method = httpRequest.getMethod();
+		String doctorId = httpRequest.getUserPrincipal().getName();
+		String[] path = httpRequest.getServletPath().split("/");
+		String lastDirectory = path[path.length - 1];
+		
+		if (HttpMethod.GET.toString().equals(method) 
+				|| HttpMethod.PUT.toString().equals(method) 
+				|| HttpMethod.PATCH.toString().equals(method)) {
+			if (!doctorId.equals(lastDirectory)) {
+				httpResponse.sendError(HttpStatus.FORBIDDEN.value());
+				return;
+			}
+		}
+			
+		chain.doFilter(request, response);
+	}
+
+}

@@ -33,17 +33,17 @@ public class DataMedUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		if (username.equals("user")) {
 			return org.springframework.security.core.userdetails.User.builder()
-					.username(username).password(passwordEncoder().encode("password")).authorities("ADMIN").build();
+					.username(username).password(passwordEncoder().encode("password")).authorities("ROLE_ADMIN").build();
 		}
 		
 		Doctor doctor =  doctorRepository.findByUsername(username);
 		if (doctor != null) {
-			return User.builder().username(username).password(doctor.getPassword()).authorities("DOCTOR").build();			
+			return User.builder().username(doctor.getId().toString()).password(doctor.getPassword()).authorities("ROLE_DOCTOR").build();			
 		}
 		
 		Patient patient =  patientRepository.findByUsername(username);
 		if (patient != null) {
-			return User.builder().username(username).password(patient.getPassword()).authorities("PATIENT").build();			
+			return User.builder().username(patient.getId().toString()).password(patient.getPassword()).authorities("ROLE_PATIENT").build();			
 		}
 		
 		throw new UsernameNotFoundException(username);
