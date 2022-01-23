@@ -47,10 +47,10 @@ public class MedicalTemplateController {
 
         MedicalTemplate medicalTemplate = medicalTemplateService.getTemplate(filename);
         ByteArrayResource resource = new ByteArrayResource(medicalTemplate.getData());
-
         return ResponseEntity.ok()
+                .header("content-disposition", "attachment;filename=" + filename.toString())
                 .contentLength(resource.contentLength())
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .contentType(MediaType.APPLICATION_PDF)
                 .body(resource);
     }
 }

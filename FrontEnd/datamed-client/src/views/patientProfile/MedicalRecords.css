@@ -9,6 +9,14 @@
     box-shadow: 2px;
 }
 
+.list-cont {
+    position: relative;
+    display: block;
+    ;
+    height: 50rem;
+    overflow: auto;
+}
+
 .list-items {
     display: block;
     color: rgb(49, 49, 49);
@@ -23,8 +31,7 @@ li:hover {
     text-decoration: underline;
 }
 
-h2{
+h2 {
     padding-left: 13rem;
     padding-bottom: 1rem;
 }
-

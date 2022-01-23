@@ -18,7 +18,7 @@ const FileUploader = ({handleFileUpload, text}) => {
     };
     return (
         <>
-            <Button onClick={handleClick} style={{ paddingTop: 4 + 'px' }}>
+            <Button onClick={handleClick} style={{ paddingTop: 4 + 'px'}}>
                 {btnText}
             </Button>
             <input

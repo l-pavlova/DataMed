@@ -1,11 +1,17 @@
 
-import React from 'react';
+import React, {useState} from 'react';
 
 import './HomeUserInfo.css';
+import FileUploader from '../fileManagement/FileUploader';
 import avatar from "../../assets/doc.JPG";
 const HomeUserView = ({
-    values
+    values,
+    handleFileUpload,
+    handleProfilePicUpload
 }) => {
+    
+    
+
     return (<div className='containerche'>
         <div className="main-body">
 
@@ -19,8 +25,8 @@ const HomeUserView = ({
                                 <div className="mt-3">
                                     <h4>  {values.firstName || 'Bochko'}  {values.lastName || 'Bochkov'}</h4>
                                     <p className="text-secondary mb-1" value={values.position || "Cardiologist"}>Cardiologist</p>
-                                    <p className="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                                    <button className="btn btn-primary">Copy card</button>
+                                    <p className="text-muted font-size-sm">Sofia, Bulgaria</p>
+                                    <FileUploader handleFileUpload={handleProfilePicUpload} text="Change profile pic"></FileUploader>
                                 </div>
                             </div>
                         </div>
@@ -71,15 +77,15 @@ const HomeUserView = ({
                                 <h6 className="mb-0">Medical Unit</h6>
                             </div>
                             <div className="col-sm-9 text-secondary">
-                                {values.medicalUnit || 'Cardiology'}  
+                                {values.medicalUnit || 'Cardiology'}
                             </div>
                         </div>
                         <hr />
-                        <div className="row">
+                        {/* <div className="row">
                             <div className="col-sm-14">
                                 <a className="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
