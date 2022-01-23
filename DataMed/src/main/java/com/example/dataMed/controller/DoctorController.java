@@ -3,20 +3,17 @@ package com.example.dataMed.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.dataMed.mail.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.dataMed.controller.mappper.DoctorModelMapper;
 import com.example.dataMed.dto.DoctorDto;
 import com.example.dataMed.model.Doctor;
 import com.example.dataMed.service.DoctorService;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(value = "/doctors")//, produces = "application/json", consumes = "application/json"
@@ -34,18 +31,42 @@ public class DoctorController {
     }
 
     @PostMapping
-    public ResponseEntity<DoctorDto> createDoctor(@RequestBody DoctorDto doctorDto) {
+    public ResponseEntity<?> createDoctor(@RequestBody DoctorDto doctorDto) {
+        Boolean isValid = EmailValidator.isEmailValid(doctorDto.getEmail());
+        if (!isValid) {
+            return new ResponseEntity<>("Email is not valid", HttpStatus.UNAUTHORIZED);
+        }
+
         Doctor doctor = modelMapper.mapFromDto(doctorDto);
         Doctor createdDoctor = doctorService.createDoctor(doctor);
         return new ResponseEntity<>(modelMapper.mapToDto(createdDoctor), HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<DoctorDto>> getAllDoctors() {
         List<Doctor> doctors = doctorService.getAll();
         List<DoctorDto> allDoctorsData = doctors.stream().map(this.modelMapper::mapToDto).collect(Collectors.toList());
         return new ResponseEntity<>(allDoctorsData, HttpStatus.OK);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> addProfilePicture(@PathVariable int id,
+                                                             @RequestParam("picture") MultipartFile picture) {
+
+        doctorService.addProfilePicture(id, picture);
+        return new ResponseEntity<>("Your picture is uploaded successfully!",
+                HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DoctorDto> updateDoctor(@PathVariable int id, @RequestBody DoctorDto doctorDto) {
+        Doctor newDoctor = doctorDto.getPassword() == null ?
+                modelMapper.mapFromDtoNullAsPass(doctorDto) : modelMapper.mapFromDto(doctorDto);
+        Doctor updated = doctorService.updateDoctor(id, newDoctor);
+
+        return new ResponseEntity<>(this.modelMapper.mapToDto(updated), HttpStatus.OK);
+    }
+
 
 
 }

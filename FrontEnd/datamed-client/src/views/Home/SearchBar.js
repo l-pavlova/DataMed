@@ -13,7 +13,6 @@ export const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         }}
     >
         {children}
-
     </a>
 ));
 
@@ -63,7 +62,7 @@ export const CustomSearch = React.forwardRef(
     },
 );
 
-export const SearchBar = ({handleSearchPatients}) => {
+export const SearchBar = ({ handleSearchPatients }) => {
 
     const [value, setValue] = useState('');
     const [patientName, setPatientName] = useState('');
@@ -72,7 +71,7 @@ export const SearchBar = ({handleSearchPatients}) => {
     return (
         <div className="search-container">
             Search for patients' data
-            <Form className="list-group"  onSubmit={async (e) => {
+            <Form className="list-group" onSubmit={async (e) => {
                 e.preventDefault();
                 handleSearchPatients(patientName, patientLastName, patientEGN);
             }}>

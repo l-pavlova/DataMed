@@ -1,0 +1,54 @@
+.input-field {
+    border: none;
+    border-bottom: solid 0.5px;
+    background-color: white;
+    box-shadow: none;
+    border-radius: 0;
+    height: 2.6em;
+}
+
+.input-field:hover {
+    border-bottom: solid black 1px;
+    background-color: rgb(232, 230, 230);
+}
+
+.input-field.is-valid:hover {
+    border-bottom: solid black 1px;
+}
+
+.input-field:focus {
+    border-bottom: solid 1px;
+    border-color: rgb(87, 167, 87);
+    ;
+    box-shadow: none;
+}
+
+.input-field.is-valid:focus {
+    border-bottom: solid 1px;
+    border-color: rgb(87, 167, 87);
+    ;
+    box-shadow: none;
+}
+
+.input-field.is-invalid:focus {
+    box-shadow: none;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.input-field.is-invalid {
+    border-color: red;
+    box-shadow: none;
+}
+
+.input-field.is-valid {
+    box-shadow: none;
+    border-color: gray;
+    background-image: none;
+}

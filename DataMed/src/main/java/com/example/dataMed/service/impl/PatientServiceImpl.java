@@ -1,15 +1,20 @@
 package com.example.dataMed.service.impl;
 
-import com.example.dataMed.model.Patient;
-import com.example.dataMed.repository.PatientRepository;
-import com.example.dataMed.service.PatientService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.dataMed.exceptions.FileStorageException;
+import com.example.dataMed.model.Patient;
+import com.example.dataMed.repository.PatientRepository;
+import com.example.dataMed.service.PatientService;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -37,19 +42,19 @@ public class PatientServiceImpl implements PatientService {
         List<Patient> patients = new ArrayList<>();
 
         List<Patient> patientsByFirstName = new ArrayList<>();
-        if (firstName.length() != 0) {
+        if (firstName != null && firstName.length() != 0) {
             patientsByFirstName = patientRepository.findByFirstName(firstName);
             patients.addAll(patientsByFirstName);
         }
 
         List<Patient> patientsByLastName = new ArrayList<>();
-        if (lastName.length() != 0) {
+        if (lastName != null && lastName.length() != 0) {
             patientsByLastName = patientRepository.findByLastName(lastName);
             patients.addAll(patientsByLastName);
         }
 
         List<Patient> patientsByEgn = new ArrayList<>();
-        if (egn.length() != 0) {
+        if (egn != null && egn.length() != 0) {
             patientsByEgn = patientRepository.findByEgn(egn);
             patients.addAll(patientsByEgn);
         }
@@ -70,5 +75,37 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Patient getPatient(Integer id) {
         return patientRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public void addProfilePicture(Integer id, MultipartFile picture) {
+
+        String fileName = StringUtils.cleanPath(picture.getOriginalFilename());
+        try {
+            Patient patient = patientRepository.getById(id);
+            patient.setImage(picture.getBytes());
+            patientRepository.save(patient);
+
+        } catch (IOException e) {
+            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", e);
+        }
+    }
+
+    @Override
+    public Patient updatePatient(int id, Patient patient) {
+        Patient curr = patientRepository.getById(id);
+        patient.setRecords(curr.getRecords());
+        patient.setUsername(curr.getUsername());
+        patient.setImage(curr.getImage());
+
+        if (patient.getPassword() != null) {
+            patientRepository.save(patient);
+            return patient;
+        }
+
+        String currPass = patientRepository.getById(id).getPassword();
+        patient.setPassword(currPass);
+        patientRepository.save(patient);
+        return patient;
     }
 }

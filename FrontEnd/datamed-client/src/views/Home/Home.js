@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import HomeUserInfo from './HomeUserInfo';
 import NavBar from '../navigation/NavBar';
-//import SearchPage from './SearchBar';
 import { SearchBar } from './SearchBar';
 import Footer from '../navigation/Footer';
 import UserList from './UserList';
 import { findPatients } from '../../utils/userFilters';
+import Templates from './TemplateList';
+import recordsService from '../../services/recordsService';
+
 const Home = () => {
 
     const initialValues = { firstName: '', lastName: '', age: '', phoneNumber: '', email: '', username: '', position: '', medicalUnit: '', hospital: '', certifications: '', password: '' };
@@ -18,137 +20,6 @@ const Home = () => {
         }
     }, [patients])
 
-
-    const testValues = [
-        {
-            "id": 1,
-            "username": "tosho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 2,
-            "username": "gosho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        }
-        , {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        }, {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": 3,
-            "username": "josho",
-            "age": 0,
-            "email": "gosho",
-            "records": [],
-            "height": 0.0,
-            "weight": 0.0
-        },
-
-
-    ];
-
     const handleFindPatients = async (name, lastName, egn) => {
         console.log('in');
         console.log(name);
@@ -156,24 +27,45 @@ const Home = () => {
             console.log(pats);
             setPatients(pats)
         });
-       
-        //await userService.register(userData);
-
     };
 
+    const handleProfilePicUpload = async (file) => {
+        let formData = new FormData();
+        formData.append('picture', file);
+        recordsService.addProfilePicDoc(formData, 1).then(() => {
+
+        }).catch(err => {
+            console.log('updating pic')
+        })
+        /* recordsService.addProfilePicPatient(formData, patientModel.id).then(() => {
+             console.log('resetting')
+             setDoctor(userService.getDoctorById(patientModel.id));
+         }).catch(err => {
+             console.log('updating pic')
+             userService.getPatientById(patientModel.id).then(gotten => {
+                 console.log('gatttheeem');
+                 console.log(gotten);
+                 setPatient(gotten);
+             })
+         });*/
+    }
 
     return (<div>
         <NavBar
-            values={initialValues}>
+            values={initialValues}
+            isSignedIn={true}>
         </NavBar>
         <HomeUserInfo
-            values={initialValues}>
+            values={initialValues}
+            handleProfilePicUpload={handleProfilePicUpload}>
         </HomeUserInfo>
         <SearchBar handleSearchPatients={handleFindPatients}>
         </SearchBar>
         {showTable && <UserList
             users={patients}>
         </UserList>}
+        <Templates>
+        </Templates>
         <Footer>
         </Footer>
     </div>);
