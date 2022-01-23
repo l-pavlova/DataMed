@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 
-@Component
 public class DoctorsEndpointFilter implements Filter {
 
 	@Override
