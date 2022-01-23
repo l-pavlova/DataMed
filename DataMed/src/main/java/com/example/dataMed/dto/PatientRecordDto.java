@@ -13,5 +13,5 @@ public class PatientRecordDto {
     private boolean isLocked;
     private String lastModified;
     private String fileName;
-    private Byte[] data;
+    private byte[] data;
 }

@@ -20,7 +20,7 @@ const Templates = ({ temps }) => {
             const link = document.createElement("a");
             link.target = "_blank";
             link.download = `${name}`
-            link.href = `http://localhost:8081/template/download?filename=${name}`;
+            link.href = `http://localhost:8081/templates/download?filename=${name}`;
             link.click();
         }
     }

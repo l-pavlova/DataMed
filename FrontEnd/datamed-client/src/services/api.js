@@ -21,9 +21,9 @@ const api = {
     downloadRecord: (filename,id) => `/patient-records/download?filename=${filename}&id=${id}`,
 
     //templateController
-    downloadTemplate: (filename) => `/template/download?filename=${filename}`,
-    addTemplate: () => `/template/uploadTemplate`,
-    getTemplates: () => `/template/templates`,
+    downloadTemplate: (filename) => `/templates/download?filename=${filename}`,
+    addTemplate: () => `/templates`,
+    getTemplates: () => `/templates`,
 }
 
 export default api;

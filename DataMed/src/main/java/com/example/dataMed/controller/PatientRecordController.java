@@ -41,7 +41,7 @@ public class PatientRecordController {
                                                              @RequestParam(required = false) String filename) {
         List<PatientRecord> records = patientRecordService.getPatientRecords(id, filename);
 
-        return new ResponseEntity<>(records.stream().map(record -> modelMapper.map(records, PatientRecordDto.class)).collect(Collectors.toList()), 
+        return new ResponseEntity<>(records.stream().map(record -> modelMapper.map(record, PatientRecordDto.class)).collect(Collectors.toList()), 
         		HttpStatus.OK);
     }
 
