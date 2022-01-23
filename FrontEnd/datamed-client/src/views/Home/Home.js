@@ -6,6 +6,7 @@ import Footer from '../navigation/Footer';
 import UserList from './UserList';
 import { findPatients } from '../../utils/userFilters';
 import Templates from './TemplateList';
+import recordsService from '../../services/recordsService';
 
 const Home = () => {
 
@@ -28,6 +29,26 @@ const Home = () => {
         });
     };
 
+    const handleProfilePicUpload = async (file) => {
+        let formData = new FormData();
+        formData.append('picture', file);
+        recordsService.addProfilePicDoc(formData, 1).then(() => {
+
+        }).catch(err => {
+            console.log('updating pic')
+        })
+        /* recordsService.addProfilePicPatient(formData, patientModel.id).then(() => {
+             console.log('resetting')
+             setDoctor(userService.getDoctorById(patientModel.id));
+         }).catch(err => {
+             console.log('updating pic')
+             userService.getPatientById(patientModel.id).then(gotten => {
+                 console.log('gatttheeem');
+                 console.log(gotten);
+                 setPatient(gotten);
+             })
+         });*/
+    }
 
     return (<div>
         <NavBar
@@ -35,7 +56,8 @@ const Home = () => {
             isSignedIn={true}>
         </NavBar>
         <HomeUserInfo
-            values={initialValues}>
+            values={initialValues}
+            handleProfilePicUpload={handleProfilePicUpload}>
         </HomeUserInfo>
         <SearchBar handleSearchPatients={handleFindPatients}>
         </SearchBar>
