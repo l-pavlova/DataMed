@@ -43,7 +43,7 @@ public class MedicalTemplateImpl implements MedicalTemplateService {
             medicalTemplates.add(newTemplate);
             medicalTemplateRepository.save(newTemplate);
         }
-        return medicalTemplates;
+        return medicalTemplateRepository.findAll();
     }
 
     @Override
