@@ -1,10 +1,10 @@
 package com.example.dataMed.service;
 
-import com.example.dataMed.model.Doctor;
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import com.example.dataMed.model.Doctor;
 
 public interface DoctorService {
 
@@ -17,7 +17,7 @@ public interface DoctorService {
 
     List<Doctor> getAll();
 
-    ResponseEntity addProfilePicture(Integer id, MultipartFile picture);
+    void addProfilePicture(Integer id, MultipartFile picture);
 
     Doctor updateDoctor(int id, Doctor doctor);
 }

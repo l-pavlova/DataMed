@@ -7,13 +7,21 @@ import com.example.dataMed.mail.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.dataMed.controller.mappper.PatientModelMapper;
 import com.example.dataMed.dto.PatientDto;
 import com.example.dataMed.model.Patient;
 import com.example.dataMed.service.PatientService;
-import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -31,7 +39,7 @@ public class PatientController {
     }
 
     @PostMapping
-    public ResponseEntity createPatient(@RequestBody PatientDto patientDto) {
+    public ResponseEntity<?> createPatient(@RequestBody PatientDto patientDto) {
         Boolean isValid = EmailValidator.isEmailValid(patientDto.getEmail());
         if (!isValid) {
             return new ResponseEntity<>("Email is not valid", HttpStatus.UNAUTHORIZED);
@@ -41,7 +49,7 @@ public class PatientController {
         return new ResponseEntity<>(modelMapper.mapToDto(createdPatient), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<PatientDto> updatePatient(@PathVariable int id, @RequestBody PatientDto patientDto) {
         Patient newPatient = patientDto.getPassword() == null ?
                 modelMapper.mapFromDtoNullAsPass(patientDto) : modelMapper.mapFromDto(patientDto);
@@ -57,27 +65,28 @@ public class PatientController {
 //        return new ResponseEntity<>(this.modelMapper.map(doctor, DoctorDto.class), HttpStatus.OK);
 //    }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<PatientDto>> getAllPatients() {
-        List<Patient> patients = patientService.getAll();
+    @GetMapping
+    public ResponseEntity<List<PatientDto>> getAllPatients(@RequestParam(required = false) String firstName,
+                                                           @RequestParam(required = false) String lastName,
+                                                           @RequestParam(required = false) String egn) {
+    	List<Patient> patients;
+    	if (firstName != null || lastName != null || egn != null) {
+    		patients = patientService.filterStatements(firstName, lastName, egn);    		
+    	} else {
+    		patients = patientService.getAll();
+    	}
+    	
         List<PatientDto> allPatientsData = patients.stream().map(modelMapper::mapToDto).collect(Collectors.toList());
         return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
     }
 
-    @GetMapping("/find")
-    public ResponseEntity<List<PatientDto>> getAllPatients(@RequestParam String firstName,
-                                                           @RequestParam String lastName,
-                                                           @RequestParam String egn) {
-        List<Patient> patients = patientService.filterStatements(firstName, lastName, egn);
-        List<PatientDto> allPatientsData = patients.stream().map(modelMapper::mapToDto).collect(Collectors.toList());
-        return new ResponseEntity<>(allPatientsData, HttpStatus.OK);
-    }
-
-    @PostMapping("/addProfilePic")
-    public ResponseEntity addProfilePicture(@RequestParam("id") Integer id,
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> addProfilePicture(@PathVariable int id,
                                             @RequestParam("picture") MultipartFile picture) {
 
-        return patientService.addProfilePicture(id, picture);
+        patientService.addProfilePicture(id, picture);
+        return new ResponseEntity<>("Your picture is uploaded successfully!",
+                HttpStatus.CREATED);
     }
 
 }

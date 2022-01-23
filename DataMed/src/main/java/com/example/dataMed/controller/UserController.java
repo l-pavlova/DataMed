@@ -1,23 +1,23 @@
 package com.example.dataMed.controller;
 
-import com.example.dataMed.model.User;
-import com.example.dataMed.dto.UserDto;
-import com.example.dataMed.service.DoctorService;
-import com.example.dataMed.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.dataMed.dto.UserDto;
+import com.example.dataMed.model.User;
+import com.example.dataMed.service.UserService;
 
 @RestController
 @RequestMapping(value = "/users")//, produces = "application/json", consumes = "application/json"
 public class UserController {
     private UserService userService;
     private ModelMapper modelMapper = new ModelMapper();;
-
-    @Autowired
-    private DoctorService doctorService;
 
 
     @Autowired

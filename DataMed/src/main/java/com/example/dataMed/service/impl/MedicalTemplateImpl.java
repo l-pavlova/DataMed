@@ -1,24 +1,24 @@
 package com.example.dataMed.service.impl;
 
-import com.example.dataMed.exceptions.FileStorageException;
-import com.example.dataMed.model.MedicalTemplate;
-import com.example.dataMed.repository.MedicalTemplateRepository;
-import com.example.dataMed.service.MedicalTemplateService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.dataMed.exceptions.FileStorageException;
+import com.example.dataMed.model.MedicalTemplate;
+import com.example.dataMed.repository.MedicalTemplateRepository;
+import com.example.dataMed.service.MedicalTemplateService;
 
 
 @Service
@@ -54,7 +54,7 @@ public class MedicalTemplateImpl implements MedicalTemplateService {
     }
 
     @Override
-    public ResponseEntity addTemplate(MultipartFile template) {
+    public void addTemplate(MultipartFile template) {
         String fileName = StringUtils.cleanPath(template.getOriginalFilename());
         try {
             if (medicalTemplateRepository.findByFileName(template.getName()) == null){
@@ -64,7 +64,5 @@ public class MedicalTemplateImpl implements MedicalTemplateService {
         } catch (IOException e) {
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", e);
         }
-        return new ResponseEntity<>("Your template is uploaded successfully!",
-                HttpStatus.CREATED);
     }
 }
