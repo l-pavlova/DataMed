@@ -27,7 +27,7 @@ const initBlobRequest = async (contentType, responseType, method, body) => {
         method,
         //credentials: 'include', todo:: uncomment when auth is ready
         headers: {
-            ...(contentType && { "Content-Type": contentType } && { "Response-Type": responseType })
+            ...(contentType && { "Content-Type": contentType })
         },
         body: body
     }
@@ -56,6 +56,25 @@ const responseHandler = async res => {
     }
     return res.json();
 };
+
+
+const responseHandlerCreate = async res => {
+    if (!res.ok) {
+        if (res.status === 401) {
+            let response = await res.json();
+
+            if (response.error?.details !== 'Specify id token for this request!') {
+                // logout();
+            }
+
+            throw response;
+        }
+
+        throw await res.json();
+    }
+    return res.text();
+};
+
 
 const requester = (endpoint) => ({
     get: () => initBaseRequest('GET').then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),

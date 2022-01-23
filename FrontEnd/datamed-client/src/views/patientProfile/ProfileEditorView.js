@@ -23,7 +23,7 @@ const ProfileEditorView = ({
                             <h6 className="mb-0">Full Name</h6>
                         </div>
                         <div className="col-sm-9 text-secondary" type="text">
-                            {values.fName || 'Bochka'}  {values.lName || 'Bochkova'}
+                            {values.firstName || 'Bochka'}  {values.lastName || 'Bochkova'}
                         </div>
                     </div>
                     <hr />
@@ -32,7 +32,7 @@ const ProfileEditorView = ({
                             <h6 className="mb-0">Email</h6>
                         </div>
                         <div className="col-sm-9 text-secondary">
-                            {values.mail || 'sexypatient@gmail.com'}
+                            {values.email || 'sexypatient@gmail.com'}
                         </div>
                     </div>
                     <hr />
@@ -40,56 +40,56 @@ const ProfileEditorView = ({
                         <div className="col-sm-3">
                             <h6 className="mb-0">Phone</h6>
                         </div>
-                        <Field  onChange={handleChange} value={values.phone} name="phoneNumber" type="text" className="input-field col-sm-9 text-secondary" placeholder='Phone' />
+                        <Field  onChange={handleChange} value={values.phoneNumber} name="phoneNumber" type="text" className="input-field col-sm-9 text-secondary" placeholder='Phone' />
                     </div>
                     <hr />
                     <div className="row">
                         <div className="col-sm-3">
                             <h6 className="mb-0">Age</h6>
                         </div>
-                        <Field onChange={handleChange} type="text" name="age" placeholder="Age" className="input-field col-sm-9 text-secondary" value={values.ag} />
+                        <Field onChange={handleChange} type="text" name="age" placeholder="Age" className="input-field col-sm-9 text-secondary" value={values.age} />
                     </div>
                     <hr />
                     <div className="row">
                         <div className="col-sm-3">
                             <h6 className="mb-0">egn</h6>
                         </div>
-                        <Field onChange={handleChange} type="text" name="egn" className="input-field col-sm-9 text-secondary" value={values.eg} />
+                        <Field onChange={handleChange} type="text" name="egn" className="input-field col-sm-9 text-secondary" value={values.egn} />
                     </div>
                     <hr />
                     <div className="row">
                         <div className="col-sm-3">
                             <h6 className="mb-0">Height</h6>
                         </div>
-                        <Field onChange={handleChange} type="text" name="height" className="input-field col-sm-9 text-secondary" value={values.hght} />
+                        <Field onChange={handleChange} type="text" name="height" className="input-field col-sm-9 text-secondary" value={values.height} />
                     </div>
                     <hr />
                     <div className="row">
                         <div className="col-sm-3">
                             <h6 className="mb-0">Weight</h6>
                         </div>
-                        <Field onChange={handleChange} type="text" name="weight" className="input-field col-sm-9 text-secondary" value={values.wght} />
+                        <Field onChange={handleChange} type="text" name="weight" className="input-field col-sm-9 text-secondary" value={values.weight} />
                     </div>
                     <hr />
                     <div className="row">
                         <div className="col-sm-3">
                             <h6 className="mb-0">Blood type</h6>
                         </div>
-                        <Field type="text" name="bloodType" className="input-field col-sm-9 text-secondary" value={values.bt} />
+                        <Field type="text" name="bloodType" className="input-field col-sm-9 text-secondary" value={values.bloodType} />
                     </div>
                     <hr />
                     <div className="row">
                         <div className="col-sm-3">
                             <h6 className="mb-0">Constant diagnoses</h6>
                         </div>
-                        <Field type="text" name="constantDiagnoses" className="input-field col-sm-9 text-secondary" value={values.diagnoses} />
+                        <Field type="text" name="constantDiagnoses" className="input-field col-sm-9 text-secondary" value={values.constantDiagnoses} />
                     </div>
                     <hr />
                     <div className="row">
                         <div className="col-sm-3">
                             <h6 className="mb-0">Pills taken</h6>
                         </div>
-                        <Field onChange={handleChange} onChange={handleChange}type="text" name="pillsTakenRegularly" className=" input-field col-sm-9 text-secondary" value={values.pills} />
+                        <Field onChange={handleChange} onChange={handleChange}type="text" name="pillsTakenRegularly" className=" input-field col-sm-9 text-secondary" value={values.pillsTakenRegularly} />
                     </div>
                     <hr />
                     <div className="row">

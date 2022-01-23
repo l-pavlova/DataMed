@@ -21,6 +21,8 @@ const api = {
 
     //templateController
     downloadTemplate: (filename) => `/template/download?filename=${filename}`,
+    addTemplate: () => `/template/uploadTemplate`,
+    getTemplates: () => `/template/templates`,
 }
 
 export default api;

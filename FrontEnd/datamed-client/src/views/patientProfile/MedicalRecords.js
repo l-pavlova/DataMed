@@ -1,43 +1,28 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import "./MedicalRecords.css"
-import FileUploader from '../fileUpload/FileUploader'
+import FileUploader from '../fileManagement/FileUploader'
 import recordsService from '../../services/recordsService'
-import { Link } from 'react-router-dom'
-import FileDownload from 'js-file-download'
+import Tooltip  from "./Tooltip"
 const MedicalRecords = ({ recs, isDoc, id }) => {
-    //todo: add link to record page
-    //todo: add refresh of docs upon adding a new one
-    const [down, SetDo] = useState(false);
     const [records, setRecords] = useState(recs);
-    const initialValues = recs.map((rec, index) =>
-        <li key={index} className="list-group-item list-group-item-action" >
-            {rec.fileName ? rec.fileName : rec.name}
-        </li>);
-    const [listItems, setListItems] = useState(initialValues
-    );
-
-    const handleDownload = async(name) => {
-
-
+    const handleDownload = async (name) => {
         if (name) {
-
+            console.log(name);
             const link = document.createElement("a");
             link.target = "_blank";
             link.download = `${name}`
-            recordsService.downloadRecord(name, id)
-              .then((res) => {
-                link.href = URL.createObjectURL(
-                  new Blob([res.data], { type: "application/pdf" })
-                );
-                link.click();
-              });
+            link.href = `http://localhost:8081/patient-records/download?filename=${name}&id=${id}`;//dont mind my mizeria here nqmashe vreme.
+            link.click();
+            // recordsService.downloadRecord(name, id)
+            //     .then((res) => {
+            //         console.log(res);
+            //         link.href = URL.createObjectURL(
+            //             new Blob([res.data], { type: "application/pdf" })
+            //         );
+            //         link.click();
+            //     });
 
         }
-
-
-
-
-        // window.location = `/patient-records/download?filename=${name}&id=${id}`
     }
 
     const getItems = useCallback(() => {
@@ -47,37 +32,45 @@ const MedicalRecords = ({ recs, isDoc, id }) => {
     const List = ({ getItems }) => {
         const [items, setItems] = useState([]);
 
+
         useEffect(() => {
+            console.log('reload');
             setItems(getItems());
-        }, [getItems])
+        }, [getItems, items])
 
         return items.map((rec, index) =>
-            <li key={index} className="list-group-item list-group-item-action" >
-                <a onClick={handleDownload(rec.fileName)}>nzn</a>
-                {rec.fileName ? rec.fileName : rec.name}
+            <li key={index} className="list-group-item list-group-item-action" title='tooltip'>
+               <p> <Tooltip message={"click to download"} position={'right'}>rec.fileName</Tooltip>
+                <a onClick={() => { handleDownload(rec.fileName) }}>{rec.fileName ? rec.fileName : rec.name}
+                </a>
+                </p>
             </li>);
     }
 
-    const handleUploadRecord = (file) => {
+    const handleUploadRecord = async (file) => {
         let formData = new FormData();
         formData.append('file', file);
-        recordsService.addRecord(formData, id);
-        recs.push({ file: file });
-        setRecords(recs);
-        /*  setListItems(recs.map((rec, index) =>
-              <li key={index}>
-                  {rec.fileName ? rec.fileName : rec.name}
-              </li>));*/
+        await recordsService.addRecord(formData, id).then((res) => {
+            console.log(`in then res is: ${res}`);
+        }).catch(err => {
+            console.log(`in catch res is: ${err}`);
+            recordsService.getRecords(id).then(gotten => {
+                console.log('gat them');
+                console.log(gotten);
+                setRecords(gotten);
+            })
+        });
     }
 
     return (
         <div className='rec-containter'>
             <h2>{isDoc ? "Patient's medical records in one place" : "Your medical records in one place"}</h2>
-            <ul className="list-group">
-                <List getItems={getItems}></List>
-                <FileUploader handleFileUpload={handleUploadRecord} text="Add more records"></FileUploader>
-            </ul>
-
+            <div className='list-cont'>
+                <ul className="list-group">
+                    <List getItems={getItems}></List>
+                    <FileUploader handleFileUpload={handleUploadRecord} text="Add more records"></FileUploader>
+                </ul>
+            </div>
         </div>
     );
 
