@@ -3,7 +3,7 @@ package com.example.dataMed.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.example.dataMed.mail.MailingValidator;
+import com.example.dataMed.mail.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,7 @@ public class PatientController {
 
     @PostMapping
     public ResponseEntity createPatient(@RequestBody PatientDto patientDto) {
-        Boolean isValid = MailingValidator.validateEmail(patientDto.getEmail());
+        Boolean isValid = EmailValidator.isEmailValid(patientDto.getEmail());
         if (!isValid) {
             return new ResponseEntity<>("Email is not valid", HttpStatus.UNAUTHORIZED);
         }
