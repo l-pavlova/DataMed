@@ -50,7 +50,7 @@ public class MedicalTemplateController {
         return ResponseEntity.ok()
                 .header("content-disposition", "attachment;filename=" + filename.toString())
                 .contentLength(resource.contentLength())
-                .contentType(MediaType.APPLICATION_PDF)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(resource);
     }
 }
