@@ -20,7 +20,9 @@ const Register = (
 
     const handleLogin = async (userData) => {
         let data = { username: userData.username, password: userData.password };
-        await login(data);
+        await login(data).then(() => {
+            //location replace to home panel 
+        });
     }
 
     return (

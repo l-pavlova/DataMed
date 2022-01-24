@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav, Container } from 'react-bootstrap';
-
+import { logout } from "../../utils/authFunctions";
 import "./NavBar.css";
 const NavBar = ({ values, isSignedIn=false }) => {
 
@@ -14,7 +14,7 @@ const NavBar = ({ values, isSignedIn=false }) => {
                         Signed in as: <a href="#login">{values.username || "default"}</a>
                     </Navbar.Text>}
                 </Navbar.Collapse>
-                {isSignedIn &&<Nav.Link href="#">Logout</Nav.Link>}
+                {isSignedIn &&<Nav.Link href="#" onClick={logout}>Logout</Nav.Link>}
             </Container>
         </Navbar>)
 }

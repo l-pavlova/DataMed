@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import "./MedicalRecords.css"
 import FileUploader from '../fileManagement/FileUploader'
 import recordsService from '../../services/recordsService'
-import Tooltip  from "./Tooltip"
+import Tooltip from "./Tooltip"
 const MedicalRecords = ({ recs, isDoc, id }) => {
     const [records, setRecords] = useState(recs);
     const handleDownload = async (name) => {
@@ -40,7 +40,6 @@ const MedicalRecords = ({ recs, isDoc, id }) => {
 
         return items.map((rec, index) =>
             <li key={index} className="list-group-item list-group-item-action" title='tooltip'>
-            
                 <a onClick={() => { handleDownload(rec.fileName) }}>{rec.fileName ? rec.fileName : rec.name}
                 </a>
             </li>);

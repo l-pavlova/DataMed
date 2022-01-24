@@ -1,9 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { Button } from 'react-bootstrap';
 import './Templates.css'
 import FileUploader from '../fileManagement/FileUploader';
 import recordsService from '../../services/recordsService';
-const Templates = ({ temps }) => {
+const Templates = () => {
 
 
     const [templates, setTemplates] = useState([]);
@@ -69,7 +68,6 @@ const Templates = ({ temps }) => {
                 <List getItems={getItems}></List>
                 <FileUploader style={{ position: 'relative', top: 30 + '%', left: + '%' }} handleFileUpload={handleUploadTemplate}></FileUploader>
             </ul>
-          
         </div>
     );
 

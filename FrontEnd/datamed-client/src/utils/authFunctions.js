@@ -19,3 +19,8 @@ export const signupDoc = async (userData, isDoc) => {
     }
 };
 
+export const logout = async () => {
+    //just clear session cookie
+    document.cookie = "JSESSIONID= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+}
+
