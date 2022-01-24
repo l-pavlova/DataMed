@@ -31,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.addFilterAt(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
 		.authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/login", "/doctors", "/patients").permitAll()
+		.antMatchers(HttpMethod.GET, "/templates/**").permitAll()
 		.anyRequest().authenticated();
 	}
 	
