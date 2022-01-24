@@ -41,7 +41,7 @@ public class DoctorsEndpointFilter implements Filter {
 			httpResponse.sendError(HttpStatus.FORBIDDEN.value());
 			return;
 		}
-		
+
 		String doctorId = httpRequest.getUserPrincipal().getName();
 		String[] path = httpRequest.getServletPath().split("/");
 		String lastDirectory = path[path.length - 1];
