@@ -4,8 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.example.dataMed.mail.EmailValidator;
+import com.google.gson.Gson;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -43,7 +47,9 @@ public class PatientController {
     public ResponseEntity<?> createPatient(@RequestBody PatientDto patientDto) {
         Boolean isValid = EmailValidator.isEmailValid(patientDto.getEmail());
         if (!isValid) {
-            return new ResponseEntity<>("Email is not valid", HttpStatus.UNAUTHORIZED);
+            final HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+            return new ResponseEntity<>("{\"message\":\"Email is not valid\"}", httpHeaders, HttpStatus.UNAUTHORIZED);
         }
         Patient patient = modelMapper.mapFromDto(patientDto);
         Patient createdPatient = patientService.createPatient(patient);
