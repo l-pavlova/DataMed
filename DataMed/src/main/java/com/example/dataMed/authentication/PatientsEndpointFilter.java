@@ -21,13 +21,22 @@ public class PatientsEndpointFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse= (HttpServletResponse) response;
 		
+		String method = httpRequest.getMethod();
+		if (HttpMethod.POST.toString().equals(method)) {
+			chain.doFilter(request, response);
+			return;
+		}
+		
+		if (httpRequest.getUserPrincipal() == null) {
+			httpResponse.sendError(HttpStatus.FORBIDDEN.value());
+			return;
+		}
+		
 		if (httpRequest.isUserInRole("ROLE_ADMIN")) {
 			chain.doFilter(request, response);
 			return;
 		}
 		
-		String method = httpRequest.getMethod();
-
 		if (httpRequest.isUserInRole("ROLE_DOCTOR")) {
 			if (HttpMethod.PATCH.toString().equals(method)) {
 				httpResponse.sendError(HttpStatus.FORBIDDEN.value());

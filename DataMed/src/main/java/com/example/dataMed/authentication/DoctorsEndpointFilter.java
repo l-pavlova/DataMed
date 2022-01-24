@@ -21,6 +21,17 @@ public class DoctorsEndpointFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse= (HttpServletResponse) response;
 		
+		String method = httpRequest.getMethod();
+		if (HttpMethod.POST.toString().equals(method)) {
+			chain.doFilter(request, response);
+			return;
+		}
+		
+		if (httpRequest.getUserPrincipal() == null) {
+			httpResponse.sendError(HttpStatus.FORBIDDEN.value());
+			return;
+		}
+		
 		if (httpRequest.isUserInRole("ROLE_ADMIN")) {
 			chain.doFilter(request, response);
 			return;
@@ -31,7 +42,6 @@ public class DoctorsEndpointFilter implements Filter {
 			return;
 		}
 		
-		String method = httpRequest.getMethod();
 		String doctorId = httpRequest.getUserPrincipal().getName();
 		String[] path = httpRequest.getServletPath().split("/");
 		String lastDirectory = path[path.length - 1];

@@ -22,6 +22,11 @@ public class PatientRecordsEndpointFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse= (HttpServletResponse) response;
 		
+		if (httpRequest.getUserPrincipal() == null) {
+			httpResponse.sendError(HttpStatus.FORBIDDEN.value());
+			return;
+		}
+		
 		if (httpRequest.isUserInRole("ROLE_ADMIN")) {
 			chain.doFilter(request, response);
 			return;
