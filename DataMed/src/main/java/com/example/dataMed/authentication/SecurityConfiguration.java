@@ -26,6 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		DataMedAuthenticationFilter authenticationFilter = new DataMedAuthenticationFilter();
 		authenticationFilter.setAuthenticationManager(authenticationManager());
+		authenticationFilter.setAuthenticationSuccessHandler(new DataMedAuthenticationSuccessHandler());
 		
 		http.csrf().disable()
 		.addFilterAt(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
