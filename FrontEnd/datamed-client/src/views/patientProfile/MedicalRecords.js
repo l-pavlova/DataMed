@@ -40,10 +40,9 @@ const MedicalRecords = ({ recs, isDoc, id }) => {
 
         return items.map((rec, index) =>
             <li key={index} className="list-group-item list-group-item-action" title='tooltip'>
-               <p> <Tooltip message={"click to download"} position={'right'}>rec.fileName</Tooltip>
+            
                 <a onClick={() => { handleDownload(rec.fileName) }}>{rec.fileName ? rec.fileName : rec.name}
                 </a>
-                </p>
             </li>);
     }
 

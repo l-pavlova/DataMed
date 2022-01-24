@@ -21,7 +21,7 @@ const initRequest = async (contentType, method, body) => {
 };
 
 
-const initBlobRequest = async (contentType, responseType, method, body) => {
+const initBlobRequest = async (contentType, method, body) => {
     //refreshToken();
     return {
         method,
@@ -54,7 +54,8 @@ const responseHandler = async res => {
 
         throw await res.json();
     }
-    return res.json();
+    let r = res.json();
+    return r;
 };
 
 
@@ -82,7 +83,7 @@ const requester = (endpoint) => ({
     create: data => initBaseRequest('POST', JSON.stringify(data)).then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
     createWithFile: data => initFileSendRequest('POST', data).then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
 	patchWithFile: data => initFileSendRequest('PATCH', data).then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
-    update: data => initBaseRequest('PUT', JSON.stringify(data)).then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
+    update: data => initBaseRequest('PUT', JSON.stringify(data)).then(options => fetch(urlBuilder(endpoint), options)),//.then(responseHandler),
     patch: data => initBaseRequest('PATCH', JSON.stringify(data)).then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
     delete: () => initBaseRequest('DELETE').then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),
 })

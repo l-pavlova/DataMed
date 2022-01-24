@@ -44,6 +44,7 @@ public class PatientRecordsEndpointFilter implements Filter {
 		if (HttpMethod.GET.toString().equals(method)) {
 			if (patientId.equals(requestPatientId)) {
 				chain.doFilter(request, response);
+				return;
 			}
 		}
 			

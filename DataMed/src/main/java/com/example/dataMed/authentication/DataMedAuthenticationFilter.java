@@ -16,6 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 public class DataMedAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -23,6 +24,7 @@ public class DataMedAuthenticationFilter extends AbstractAuthenticationProcessin
 		super(new AntPathRequestMatcher("/login", "POST"));
 	}
 
+	@CrossOrigin
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException, IOException, ServletException {

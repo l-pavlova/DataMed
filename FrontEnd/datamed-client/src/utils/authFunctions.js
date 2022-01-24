@@ -1,8 +1,8 @@
 import userService from '../services/userService'
 
-export const login = async (email, password) => {
+export const login = async (userData) => {
     try {
-        await userService.getUser(email, password)
+        await userService.loginUser(userData)
     } catch (error) {
         console.log(error);
         return error;

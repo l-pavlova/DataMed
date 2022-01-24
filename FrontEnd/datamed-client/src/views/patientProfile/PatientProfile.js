@@ -19,7 +19,7 @@ const PatientProfile = ({
     const { patient, isDoc } = location.state;
     console.log(patient);
     const [edit, setEdit] = useState(false);
-    
+
     const [patientModel, setPatient] = useState(patient);
 
     let image = avatar;
@@ -45,10 +45,10 @@ const PatientProfile = ({
     }
 
     const handleUpdateSubmit = async (data) => {
-      
+
         console.log(data);
+        data.id = patientModel.id;
         userService.updatePatient(data, patientModel.id).then(res => {
-          
             console.log(res)
             userService.getPatientById(patientModel.id).then(gotten => {
                 console.log('handling and shit');
@@ -56,7 +56,10 @@ const PatientProfile = ({
                 setPatient(gotten);
                 setEdit(false);
             })
-        });
+        })
+        .then(r => console.log(r))
+        .catch(err => console.log("IN ERR"))
+        .finally(console.log("PLS IN FINALLY AT LEAST"));
     }
 
     return (<div className='containerche'>
