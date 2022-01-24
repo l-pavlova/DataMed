@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.example.dataMed.mail.EmailValidator;
-import com.google.gson.Gson;
-import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
