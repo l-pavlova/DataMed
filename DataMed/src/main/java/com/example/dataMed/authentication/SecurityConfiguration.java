@@ -33,7 +33,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/login", "/doctors", "/patients").permitAll()
 		.antMatchers(HttpMethod.GET, "/templates/**").permitAll()
-		.anyRequest().authenticated();
+		.anyRequest().authenticated()
+		.and()
+		.logout().invalidateHttpSession(true)
+		.logoutUrl("/logout");
 	}
 	
 	@Override
