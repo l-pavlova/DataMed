@@ -44,7 +44,16 @@ const responseHandler = async res => {
     if (!res.ok) {
         if (res.status === 401) {
             let response = await res.json();
+            alert(response.message);
+            if (response.error?.details !== 'Specify id token for this request!') {
+                // logout();
+            }
 
+            throw response;
+        }
+        if (res.status === 409) {
+            let response = await res.json();
+            alert(response.message);
             if (response.error?.details !== 'Specify id token for this request!') {
                 // logout();
             }
