@@ -1,9 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { Button } from 'react-bootstrap';
 import './Templates.css'
 import FileUploader from '../fileManagement/FileUploader';
 import recordsService from '../../services/recordsService';
-const Templates = ({ temps }) => {
+const Templates = () => {
 
 
     const [templates, setTemplates] = useState([]);
@@ -64,12 +63,11 @@ const Templates = ({ temps }) => {
 
     return (
         <div className='templates-container'>
-            <h3>Available tempaltes to fill for medical records:</h3>
+            <h3>Available templates to fill for medical records:</h3>
             <ul className='templates-list'>
                 <List getItems={getItems}></List>
                 <FileUploader style={{ position: 'relative', top: 30 + '%', left: + '%' }} handleFileUpload={handleUploadTemplate}></FileUploader>
             </ul>
-          
         </div>
     );
 

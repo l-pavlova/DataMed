@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import HomeUserInfo from './HomeUserInfo';
 import NavBar from '../navigation/NavBar';
 import { SearchBar } from './SearchBar';
@@ -7,10 +8,24 @@ import UserList from './UserList';
 import { findPatients } from '../../utils/userFilters';
 import Templates from './TemplateList';
 import recordsService from '../../services/recordsService';
+import userService from '../../services/userService';
 
 const Home = () => {
 
     const initialValues = { firstName: '', lastName: '', age: '', phoneNumber: '', email: '', username: '', position: '', medicalUnit: '', hospital: '', certifications: '', password: '' };
+
+
+    const { id } = useParams();
+    const [userModel, setUserModel] = useState(false);
+    
+    useEffect(() => {
+        console.log('in use effect')
+        userService.getDoctorById(id).then(res => {
+            console.log(res);
+            setUserModel(res);
+        });
+    }, []);
+
     const [patients, setPatients] = useState([]);
     const [showTable, setShowTable] = useState(false);
     useEffect(() => {
@@ -18,7 +33,7 @@ const Home = () => {
         if (patients.length > 0) {
             setShowTable(true);
         }
-    }, [patients])
+    }, [patients]);
 
     const handleFindPatients = async (name, lastName, egn) => {
         console.log('in');
@@ -51,21 +66,21 @@ const Home = () => {
     }
 
     return (<div>
-        <NavBar
-            values={initialValues}
+        {userModel && <NavBar
+            values={userModel}
             isSignedIn={true}>
-        </NavBar>
-        <HomeUserInfo
-            values={initialValues}
+        </NavBar>}
+        {userModel && <HomeUserInfo
+            values={userModel || initialValues}
             handleProfilePicUpload={handleProfilePicUpload}>
-        </HomeUserInfo>
+        </HomeUserInfo>}
         <SearchBar handleSearchPatients={handleFindPatients}>
         </SearchBar>
         {showTable && <UserList
             users={patients}>
         </UserList>}
-        <Templates>
-        </Templates>
+        {userModel && <Templates>
+        </Templates>}
         <Footer>
         </Footer>
     </div>);

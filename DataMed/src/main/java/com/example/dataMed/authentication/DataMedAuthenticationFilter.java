@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 public class DataMedAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 

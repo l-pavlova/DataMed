@@ -1,8 +1,8 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom'
 import './PatientProfile.css';
 import avatar from "../../assets/patient.jpg";
-import { useLocation } from 'react-router-dom'
 import MedicalRecords from './MedicalRecords'
 import NavBar from '../navigation/NavBar';
 import Footer from '../navigation/Footer';
@@ -15,12 +15,24 @@ import ProfileEditor from './ProfileEditor';
 const PatientProfile = ({
 }) => {
 
+
     const location = useLocation()
-    const { patient, isDoc } = location.state;
-    console.log(patient);
+    const { id, isDoc } = location.state;
+    const [patientModel, setPatient] = useState(false);
+    const [isDoctor, setIsDoc] = useState(isDoc)
     const [edit, setEdit] = useState(false);
-    
-    const [patientModel, setPatient] = useState(patient);
+    console.log(id);
+
+    useEffect(() => {
+        console.log('in use effect')
+        userService.getPatientById(id).then(res => {
+            console.log(res);
+            setPatient(res);
+        })
+            .then(p =>
+                console.log(p));
+    }, []);
+
 
     let image = avatar;
     if (patientModel.image) {
@@ -45,10 +57,10 @@ const PatientProfile = ({
     }
 
     const handleUpdateSubmit = async (data) => {
-      
+
         console.log(data);
+        data.id = patientModel.id;
         userService.updatePatient(data, patientModel.id).then(res => {
-          
             console.log(res)
             userService.getPatientById(patientModel.id).then(gotten => {
                 console.log('handling and shit');
@@ -56,13 +68,16 @@ const PatientProfile = ({
                 setPatient(gotten);
                 setEdit(false);
             })
-        });
+        })
+            .then(r => console.log(r))
+            .catch(err => console.log("IN ERR"))
+            .finally(console.log("PLS IN FINALLY AT LEAST"));
     }
 
     return (<div className='containerche'>
-        <NavBar>
-        </NavBar>
-        <div className="main-body">
+        {patientModel && <NavBar>
+        </NavBar>}
+        {patientModel && <div className="main-body">
             <div className="row gutters-sm">
                 <div className="col-md-4 mb-3">
                     <div className="card">
@@ -78,6 +93,7 @@ const PatientProfile = ({
                     </div>
                 </div>
             </div>
+
             {edit ? <ProfileEditor handleSubmit={handleUpdateSubmit} patient={patientModel} handleChange={e => console.log('ops')} ></ProfileEditor> : <div className="col-md-8">
                 <div className="card mb-3">
                     <div className="card-body">
@@ -95,7 +111,7 @@ const PatientProfile = ({
                                 <h6 className="mb-0">Email</h6>
                             </div>
                             <div className="col-sm-9 text-secondary">
-                                {patient.email || 'sexypatient@gmail.com'}
+                                {patientModel.email || 'sexypatient@gmail.com'}
                             </div>
                         </div>
                         <hr />
@@ -190,8 +206,8 @@ const PatientProfile = ({
             </div>
             }
         </div>
-        <MedicalRecords recs={patientModel.records} isDoc={isDoc} id={patientModel.id} className="medical-records"></MedicalRecords>
-
+        }
+        {patientModel.records && <MedicalRecords recs={patientModel.records} isDoc={isDoctor} id={patientModel.id} className="medical-records"></MedicalRecords>}
         <Footer>
         </Footer>
     </div>

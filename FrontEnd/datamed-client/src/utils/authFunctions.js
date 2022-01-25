@@ -1,21 +1,30 @@
 import userService from '../services/userService'
 
-export const login = async (email, password) => {
+export const login = async (userData) => {
     try {
-        await userService.getUser(email, password)
+        return await userService.loginUser(userData)
     } catch (error) {
         console.log(error);
         return error;
     }
 };
 
-export const signupDoc = async (userData, isDoc) => {
+export const signup = async (userData, isDoc) => {
     try {
         console.log(userData);
-        isDoc ? userService.registerDoc(userData).then(doc => console.log(doc)): userService.registerPatient(userData).then(pat => console.log(pat));
+        isDoc ? userService.registerDoc(userData)
+            .then(doc => console.log(doc)) : userService.registerPatient(userData)
+                .then(user => {
+                    console.log(user);
+                    return user
+                });
     } catch (error) {
         console.log(error);
         return error;
     }
 };
+
+export const logout = async () => {
+     return await userService.logout();
+}
 
