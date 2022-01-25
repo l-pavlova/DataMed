@@ -22,6 +22,10 @@ const Register = (
         let data = { username: userData.username, password: userData.password };
         await login(data).then((data) => {
             console.log(data);
+            if (!data.id) {
+                alert("Wrong credentials!")
+                return;
+            }
             if (data.role == "ROLE_DOCTOR") {
                 console.log('doctorche')
                 navigate(`/${data.id}`);
