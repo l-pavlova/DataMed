@@ -10,18 +10,14 @@ export const login = async (userData) => {
 };
 
 export const signup = async (userData, isDoc) => {
-    try {
-        console.log(userData);
-        isDoc ? userService.registerDoc(userData)
-            .then(doc => console.log(doc)) : userService.registerPatient(userData)
-                .then(user => {
-                    console.log(user);
-                    return user
-                });
-    } catch (error) {
-        console.log(error);
-        return error;
-    }
+    console.log(userData);
+    isDoc ? userService.registerDoc(userData)
+        .then(doc => console.log(doc)) : userService.registerPatient(userData)
+            .then(user => {
+                console.log(user);
+                return user
+            });
+
 };
 
 export const logout = async () => {

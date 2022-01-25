@@ -14,8 +14,10 @@ const Register = (
     const navigate = useNavigate();
 
     const handleRegister = async (userData) => {
-        await signup(userData, isDoctor);
-        setIsLogin(true);
+        await signup(userData, isDoctor)
+            .then(() =>
+            {setIsLogin(true)})
+            .catch((res) => setIsLogin(false));
     };
 
     const handleLogin = async (userData) => {
