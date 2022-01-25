@@ -5,7 +5,6 @@ import RegisterForm from './RegisterForm';
 import NavBar from '../navigation/NavBar';
 import './Register.css'
 import Footer from '../navigation/Footer';
-import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 const Register = (
@@ -22,10 +21,16 @@ const Register = (
 
     const handleLogin = async (userData) => {
         let data = { username: userData.username, password: userData.password };
-        await login(data).then((userId) => {
-            //get from vladi
-            console.log(userId);
-            navigate(`/1`);
+        await login(data).then((data) => {
+            console.log(data);
+            if (data.role == "ROLE_DOCTOR") {
+                console.log('doctorche')
+                navigate(`/${data.id}`);
+            } else {
+                console.log('pacientche')
+                navigate(`/patient/${data.id}`);
+            }
+
         });
     }
 

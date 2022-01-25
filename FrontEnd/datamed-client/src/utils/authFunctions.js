@@ -25,6 +25,6 @@ export const signupDoc = async (userData, isDoc) => {
 };
 
 export const logout = async () => {
-    return await userService.logout();//do whatever with it afterwards
+     return await userService.logout();
 }
 

@@ -66,7 +66,7 @@ const MedicalRecords = ({ recs, isDoc, id }) => {
             <div className='list-cont'>
                 <ul className="list-group">
                     <List getItems={getItems}></List>
-                    <FileUploader handleFileUpload={handleUploadRecord} text="Add more records"></FileUploader>
+                    {isDoc && <FileUploader handleFileUpload={handleUploadRecord} text="Add more records"></FileUploader>}
                 </ul>
             </div>
         </div>

@@ -1,9 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { logout } from "../../utils/authFunctions";
 import "./NavBar.css";
-const NavBar = ({ values, isSignedIn=false }) => {
+const NavBar = ({ values, isSignedIn = false }) => {
 
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        logout().then(() => {
+            navigate("/register");
+        });
+    }
     return (
         <Navbar className="color-nav" variant="light">
             <Container>
@@ -14,7 +21,7 @@ const NavBar = ({ values, isSignedIn=false }) => {
                         Signed in as: <a href="#login">{values.username || "default"}</a>
                     </Navbar.Text>}
                 </Navbar.Collapse>
-                {isSignedIn &&<Nav.Link href="#" onClick={logout}>Logout</Nav.Link>}
+                {isSignedIn && <Nav.Link href="#" onClick={handleLogout}>Logout</Nav.Link>}
             </Container>
         </Navbar>)
 }

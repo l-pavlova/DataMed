@@ -1,8 +1,8 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom'
 import './PatientProfile.css';
 import avatar from "../../assets/patient.jpg";
-import { useLocation } from 'react-router-dom'
 import MedicalRecords from './MedicalRecords'
 import NavBar from '../navigation/NavBar';
 import Footer from '../navigation/Footer';
@@ -15,12 +15,24 @@ import ProfileEditor from './ProfileEditor';
 const PatientProfile = ({
 }) => {
 
+
     const location = useLocation()
     const { patient, isDoc } = location.state;
-    console.log(patient);
-    const [edit, setEdit] = useState(false);
-
+    const { id } = useParams();
     const [patientModel, setPatient] = useState(patient);
+    const [isDoctor, setIsDoc] = useState(isDoc)
+    const [edit, setEdit] = useState(false);
+    console.log(patient);
+
+    useEffect(() => {
+        userService.getPatientById(id).then(res => {
+            console.log(res);
+            setPatient(res);
+            setIsDoc(false);
+        });
+    }, []);
+
+
 
     let image = avatar;
     if (patientModel.image) {
@@ -57,9 +69,9 @@ const PatientProfile = ({
                 setEdit(false);
             })
         })
-        .then(r => console.log(r))
-        .catch(err => console.log("IN ERR"))
-        .finally(console.log("PLS IN FINALLY AT LEAST"));
+            .then(r => console.log(r))
+            .catch(err => console.log("IN ERR"))
+            .finally(console.log("PLS IN FINALLY AT LEAST"));
     }
 
     return (<div className='containerche'>
@@ -193,7 +205,7 @@ const PatientProfile = ({
             </div>
             }
         </div>
-        <MedicalRecords recs={patientModel.records} isDoc={isDoc} id={patientModel.id} className="medical-records"></MedicalRecords>
+        <MedicalRecords recs={patientModel.records} isDoc={isDoctor} id={patientModel.id} className="medical-records"></MedicalRecords>
 
         <Footer>
         </Footer>
