@@ -4,7 +4,11 @@ import FileUploader from '../fileManagement/FileUploader'
 import recordsService from '../../services/recordsService'
 import Tooltip from "./Tooltip"
 const MedicalRecords = ({ recs, isDoc, id }) => {
+
     const [records, setRecords] = useState(recs);
+    useEffect(() => {
+        recordsService.getRecords(id).then(r => setRecords(r));
+    }, [])
     const handleDownload = async (name) => {
         if (name) {
             console.log(name);
@@ -62,7 +66,7 @@ const MedicalRecords = ({ recs, isDoc, id }) => {
 
     return (
         <div className='rec-containter'>
-            <h2>{isDoc ? "Patient's medical records in one place" : "Your medical records in one place"}</h2>
+            <h3>{isDoc ? "Patient's medical records in one place" : "Your medical records in one place"}</h3>
             <div className='list-cont'>
                 <ul className="list-group">
                     <List getItems={getItems}></List>
