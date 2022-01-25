@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
 import HomeUserInfo from './HomeUserInfo';
 import NavBar from '../navigation/NavBar';
 import { SearchBar } from './SearchBar';
@@ -7,10 +8,19 @@ import UserList from './UserList';
 import { findPatients } from '../../utils/userFilters';
 import Templates from './TemplateList';
 import recordsService from '../../services/recordsService';
+import userService from '../../services/userService';
 
 const Home = () => {
 
+    const { id } = useParams();
+    console.log(id);
     const initialValues = { firstName: '', lastName: '', age: '', phoneNumber: '', email: '', username: '', position: '', medicalUnit: '', hospital: '', certifications: '', password: '' };
+
+    const [userModel, setUserModel] = [];
+    useEffect(() => {
+        userService.getPatientById(id).then(res => setUserModel(res))
+    }, []);
+    
     const [patients, setPatients] = useState([]);
     const [showTable, setShowTable] = useState(false);
     useEffect(() => {

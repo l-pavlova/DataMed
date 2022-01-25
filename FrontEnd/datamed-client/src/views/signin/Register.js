@@ -5,23 +5,26 @@ import RegisterForm from './RegisterForm';
 import NavBar from '../navigation/NavBar';
 import './Register.css'
 import Footer from '../navigation/Footer';
-
+import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Register = (
 ) => {
     const [isLogin, setIsLogin] = useState(true);
     const [isDoctor, setIsDoctor] = useState(true);
+    const navigate = useNavigate();
 
     const handleRegister = async (userData) => {
         await signupDoc(userData, isDoctor);
-        //await userService.register(userData);
         setIsLogin(true);
+
     };
 
     const handleLogin = async (userData) => {
         let data = { username: userData.username, password: userData.password };
-        await login(data).then(() => {
-            //location replace to home panel 
+        await login(data).then((userId) => {
+            console.log(userId);
+            navigate(`/1`);
         });
     }
 

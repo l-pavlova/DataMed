@@ -24,6 +24,9 @@ const api = {
     downloadTemplate: (filename) => `/templates/download?filename=${filename}`,
     addTemplate: () => `/templates`,
     getTemplates: () => `/templates`,
+
+    //vladi magic
+    logout: () => `/logout`,
 }
 
 export default api;
