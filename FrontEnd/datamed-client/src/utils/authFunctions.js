@@ -9,7 +9,7 @@ export const login = async (userData) => {
     }
 };
 
-export const signupDoc = async (userData, isDoc) => {
+export const signup = async (userData, isDoc) => {
     try {
         console.log(userData);
         isDoc ? userService.registerDoc(userData)

@@ -11,7 +11,7 @@ const userService = {
     findPatients: async (firstName, lastName, EGN) => await requester(api.findPatients(firstName, lastName, EGN)).get(),
     getPatientById: async (id) => await requester(api.getPatientById(id)).get(),
     getDoctorById: async (id) => await requester(api.getDoctorById(id)).get(),
-    logout: async () => await requester(api.logout()).create()
+    logout: async () => await requester(api.logout()).postNoJson()
 }
 
 export default userService;

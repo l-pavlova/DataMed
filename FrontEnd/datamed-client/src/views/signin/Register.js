@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import signin from "../../assets/sign_up.png";
-import { login, signupDoc } from '../../utils/authFunctions'
+import { login, signup } from '../../utils/authFunctions'
 import RegisterForm from './RegisterForm';
 import NavBar from '../navigation/NavBar';
 import './Register.css'
@@ -14,9 +14,8 @@ const Register = (
     const navigate = useNavigate();
 
     const handleRegister = async (userData) => {
-        await signupDoc(userData, isDoctor);
+        await signup(userData, isDoctor);
         setIsLogin(true);
-
     };
 
     const handleLogin = async (userData) => {
@@ -28,7 +27,8 @@ const Register = (
                 navigate(`/${data.id}`);
             } else {
                 console.log('pacientche')
-                navigate(`/patient/${data.id}`);
+                let state = { id: data.id, isDoc: false };
+                navigate(`/patient`, { state: state});
             }
 
         });

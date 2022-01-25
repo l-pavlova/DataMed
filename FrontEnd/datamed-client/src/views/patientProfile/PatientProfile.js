@@ -17,20 +17,19 @@ const PatientProfile = ({
 
 
     const location = useLocation()
-    const { patient, isDoc } = location.state;
-    const { id } = useParams();
-    const [patientModel, setPatient] = useState(patient);
+    const { id, isDoc } = location.state;
+    const [patientModel, setPatient] = useState(false);
     const [isDoctor, setIsDoc] = useState(isDoc)
     const [edit, setEdit] = useState(false);
-    console.log(patient);
+    console.log(id);
 
-    useEffect(() => {
-        userService.getPatientById(id).then(res => {
-            console.log(res);
-            setPatient(res);
-            setIsDoc(false);
-        });
-    }, []);
+
+    userService.getPatientById(id).then(res => {
+        console.log(res);
+        setPatient(res);
+        setIsDoc(false);
+    });
+
 
 
 
@@ -75,9 +74,9 @@ const PatientProfile = ({
     }
 
     return (<div className='containerche'>
-        <NavBar>
-        </NavBar>
-        <div className="main-body">
+        {patientModel && <NavBar>
+        </NavBar>}
+        {patientModel && <div className="main-body">
             <div className="row gutters-sm">
                 <div className="col-md-4 mb-3">
                     <div className="card">
@@ -93,6 +92,7 @@ const PatientProfile = ({
                     </div>
                 </div>
             </div>
+
             {edit ? <ProfileEditor handleSubmit={handleUpdateSubmit} patient={patientModel} handleChange={e => console.log('ops')} ></ProfileEditor> : <div className="col-md-8">
                 <div className="card mb-3">
                     <div className="card-body">
@@ -110,7 +110,7 @@ const PatientProfile = ({
                                 <h6 className="mb-0">Email</h6>
                             </div>
                             <div className="col-sm-9 text-secondary">
-                                {patient.email || 'sexypatient@gmail.com'}
+                                {patientModel.email || 'sexypatient@gmail.com'}
                             </div>
                         </div>
                         <hr />
@@ -205,8 +205,8 @@ const PatientProfile = ({
             </div>
             }
         </div>
-        <MedicalRecords recs={patientModel.records} isDoc={isDoctor} id={patientModel.id} className="medical-records"></MedicalRecords>
-
+        }
+        {patientModel.records && <MedicalRecords recs={patientModel.records} isDoc={isDoctor} id={patientModel.id} className="medical-records"></MedicalRecords>}
         <Footer>
         </Footer>
     </div>
