@@ -18,9 +18,11 @@ const Home = () => {
 
     const [userModel, setUserModel] = [];
     useEffect(() => {
-        userService.getPatientById(id).then(res => setUserModel(res))
+        userService.getPatientById(id).then(res => {
+            setUserModel(res);
+            //check if here it's doctor or patient somehow)
     }, []);
-    
+
     const [patients, setPatients] = useState([]);
     const [showTable, setShowTable] = useState(false);
     useEffect(() => {

@@ -23,6 +23,7 @@ const Register = (
     const handleLogin = async (userData) => {
         let data = { username: userData.username, password: userData.password };
         await login(data).then((userId) => {
+            //get from vladi
             console.log(userId);
             navigate(`/1`);
         });
