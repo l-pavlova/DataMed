@@ -56,6 +56,7 @@ public class PatientsEndpointFilter implements Filter {
 				|| HttpMethod.PATCH.toString().equals(method)) {
 			if (patientId.equals(lastDirectory)) {
 				chain.doFilter(request, response);
+				return;
 			}
 		}
 			

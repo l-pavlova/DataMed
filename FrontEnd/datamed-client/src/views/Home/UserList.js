@@ -27,7 +27,7 @@ const UserList = ({ users,
             <tbody>
                 {
                     users.map((user) => <tr key={user.username.toString()} className="table-row">
-                        <td> <Link to={`/patient`} state={{patient: user, isDoc: false}}>{user.firstName || 'vascho'}</Link></td>
+                        <td> <Link to={`/patient`} state={{ id: user.id, isDoc: false }}>{user.firstName || 'vascho'}</Link></td>
                         <td>{user.lastName || 'imence '}</td>
                         <td>{user.egn || "egenence"}</td>
                     </tr>)
