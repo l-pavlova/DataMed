@@ -94,7 +94,7 @@ const PatientProfile = ({
                 </div>
             </div>
 
-            {edit ? <ProfileEditor handleSubmit={handleUpdateSubmit} patient={patientModel} handleChange={e => console.log('ops')} ></ProfileEditor> : <div className="col-md-8">
+            {edit ? <ProfileEditor handleSubmit={handleUpdateSubmit} patient={patientModel} handleChange={e => console.log('')} ></ProfileEditor> : <div className="col-md-8">
                 <div className="card mb-3">
                     <div className="card-body">
                         <div className="row">

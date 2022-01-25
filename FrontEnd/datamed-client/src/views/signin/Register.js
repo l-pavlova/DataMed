@@ -15,9 +15,7 @@ const Register = (
 
     const handleRegister = async (userData) => {
         await signup(userData, isDoctor)
-            .then(() =>
-            {setIsLogin(true)})
-            .catch((res) => setIsLogin(false));
+            .then(p => { console.log(p); setIsLogin(true) })
     };
 
     const handleLogin = async (userData) => {
@@ -30,7 +28,7 @@ const Register = (
             } else {
                 console.log('pacientche')
                 let state = { id: data.id, isDoc: false };
-                navigate(`/patient`, { state: state});
+                navigate(`/patient`, { state: state });
             }
 
         });
