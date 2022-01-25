@@ -17,6 +17,7 @@ const Home = () => {
 
     const { id } = useParams();
     const [userModel, setUserModel] = useState(false);
+    
     useEffect(() => {
         console.log('in use effect')
         userService.getDoctorById(id).then(res => {

@@ -23,14 +23,15 @@ const PatientProfile = ({
     const [edit, setEdit] = useState(false);
     console.log(id);
 
-
-    userService.getPatientById(id).then(res => {
-        console.log(res);
-        setPatient(res);
-        setIsDoc(false);
-    });
-
-
+    useEffect(() => {
+        console.log('in use effect')
+        userService.getPatientById(id).then(res => {
+            console.log(res);
+            setPatient(res);
+        })
+            .then(p =>
+                console.log(p));
+    }, []);
 
 
     let image = avatar;
