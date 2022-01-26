@@ -1,7 +1,6 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { Formik, Field } from 'formik'
-import { ErrorMessage } from 'formik';
+import { Form, } from 'react-bootstrap';
+import {  Field } from 'formik'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -9,9 +8,6 @@ const ProfileEditorView = ({
     handleSubmit,
     handleChange,
     values,
-    touched,
-    errors,
-    loading,
 }) => {
     return (
         <Form noValidate className="col-md-8">
