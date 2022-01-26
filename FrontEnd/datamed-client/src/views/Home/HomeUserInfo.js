@@ -1,16 +1,22 @@
 
 import React, {useState} from 'react';
-
-import './HomeUserInfo.css';
-import FileUploader from '../fileManagement/FileUploader';
 import avatar from "../../assets/doc.JPG";
+import './HomeUserInfo.css';
+
+import FileUploader from '../fileManagement/FileUploader';
+import arrayBufferToBase64 from '../../utils/imgStringConverter';
 const HomeUserView = ({
     values,
     handleFileUpload,
     handleProfilePicUpload
 }) => {
     
-    
+    let image = avatar;
+    if (values.image) {
+        let base64String = arrayBufferToBase64(values.image)
+        const base64Image = 'data:image/png;base64,'.concat(base64String);
+        image = base64Image;
+    }
 
     return (<div className='containerche'>
         <div className="main-body">
@@ -21,7 +27,7 @@ const HomeUserView = ({
                     <div className="card">
                         <div className="card-body">
                             <div className="d-flex flex-column align-items-center text-center">
-                                <img src={avatar} alt="doc-avatar" className="doc-avatar" />
+                                <img src={image} alt="doc-avatar" className="doc-avatar" />
                                 <div className="mt-3">
                                     <h4>  {values.firstName || 'Bochko'}  {values.lastName || 'Bochkov'}</h4>
                                     <p className="text-secondary mb-1" value={values.position || "Cardiologist"}>Cardiologist</p>

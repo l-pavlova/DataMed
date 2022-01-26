@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, } from 'react-bootstrap';
-import {  Field } from 'formik'
+import { Field } from 'formik'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -36,7 +36,7 @@ const ProfileEditorView = ({
                         <div className="col-sm-3">
                             <h6 className="mb-0">Phone</h6>
                         </div>
-                        <Field  onChange={handleChange} value={values.phoneNumber} name="phoneNumber" type="text" className="input-field col-sm-9 text-secondary" placeholder='Phone' />
+                        <Field onChange={handleChange} value={values.phoneNumber} name="phoneNumber" type="text" className="input-field col-sm-9 text-secondary" placeholder='Phone' />
                     </div>
                     <hr />
                     <div className="row">
@@ -85,7 +85,7 @@ const ProfileEditorView = ({
                         <div className="col-sm-3">
                             <h6 className="mb-0">Pills taken</h6>
                         </div>
-                        <Field onChange={handleChange} onChange={handleChange}type="text" name="pillsTakenRegularly" className=" input-field col-sm-9 text-secondary" value={values.pillsTakenRegularly} />
+                        <Field onChange={handleChange} onChange={handleChange} type="text" name="pillsTakenRegularly" className=" input-field col-sm-9 text-secondary" value={values.pillsTakenRegularly} />
                     </div>
                     <hr />
                     <div className="row">

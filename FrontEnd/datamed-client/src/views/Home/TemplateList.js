@@ -4,7 +4,6 @@ import FileUploader from '../fileManagement/FileUploader';
 import recordsService from '../../services/recordsService';
 const Templates = () => {
 
-
     const [templates, setTemplates] = useState([]);
     useEffect(() => {
         recordsService.getTemplates().then(temps => {
@@ -54,7 +53,6 @@ const Templates = () => {
         }).catch(err => {
             console.log(`in catch res is: ${err}`);
             recordsService.getTemplates().then(gotten => {
-                console.log('gat them');
                 console.log(gotten);
                 setTemplates(gotten);
             })

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import "./MedicalRecords.css"
 import FileUploader from '../fileManagement/FileUploader'
 import recordsService from '../../services/recordsService'
-import Tooltip from "./Tooltip"
+
 const MedicalRecords = ({ recs, isDoc, id }) => {
 
     const [records, setRecords] = useState(recs);
@@ -17,15 +17,6 @@ const MedicalRecords = ({ recs, isDoc, id }) => {
             link.download = `${name}`
             link.href = `http://localhost:8081/patient-records/download?filename=${name}&id=${id}`;//dont mind my mizeria here nqmashe vreme.
             link.click();
-            // recordsService.downloadRecord(name, id)
-            //     .then((res) => {
-            //         console.log(res);
-            //         link.href = URL.createObjectURL(
-            //             new Blob([res.data], { type: "application/pdf" })
-            //         );
-            //         link.click();
-            //     });
-
         }
     }
 

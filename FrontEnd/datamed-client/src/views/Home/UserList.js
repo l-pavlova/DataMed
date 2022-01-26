@@ -3,20 +3,11 @@ import { Link } from 'react-router-dom'
 
 import './UserList.css'
 
-
-const User = ({ props }) => {
-    return (<tr>
-        <td>{props.firstName || ''}</td>
-        <td>{props.lastName || ''} </td>
-        <td>{props.EGN || ''} </td>
-    </tr>)
-}
-
-const UserList = ({ 
+const UserList = ({
     users,
     showUserData,
     docId
- }) => {
+}) => {
 
     return (
         <div className='user-container '><table className="table table-striped">

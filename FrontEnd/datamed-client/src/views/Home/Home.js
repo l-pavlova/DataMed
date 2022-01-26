@@ -17,7 +17,7 @@ const Home = () => {
 
     const { id } = useParams();
     const [userModel, setUserModel] = useState(false);
-    
+
     useEffect(() => {
         console.log('in use effect')
         userService.getDoctorById(id).then(res => {
@@ -47,22 +47,14 @@ const Home = () => {
     const handleProfilePicUpload = async (file) => {
         let formData = new FormData();
         formData.append('picture', file);
-        recordsService.addProfilePicDoc(formData, 1).then(() => {
-
+        recordsService.addProfilePicDoc(formData, userModel.id).then(() => {
+            setUserModel(userService.getDoctorById(userModel.id));
         }).catch(err => {
-            console.log('updating pic')
-        })
-        /* recordsService.addProfilePicPatient(formData, patientModel.id).then(() => {
-             console.log('resetting')
-             setDoctor(userService.getDoctorById(patientModel.id));
-         }).catch(err => {
-             console.log('updating pic')
-             userService.getPatientById(patientModel.id).then(gotten => {
-                 console.log('gatttheeem');
-                 console.log(gotten);
-                 setPatient(gotten);
-             })
-         });*/
+            userService.getDoctorById(userModel.id).then(gotten => {
+                console.log(gotten);
+                setUserModel(gotten);
+            })
+        });
     }
 
     return (<div>
