@@ -27,10 +27,10 @@ const Register = (
                 return;
             }
             if (data.role == "ROLE_DOCTOR") {
-                console.log('doctorche')
+                console.log('doctor')
                 navigate(`/${data.id}`);
             } else {
-                console.log('pacientche')
+                console.log('pacient')
                 let state = { id: data.id, isDoc: false };
                 navigate(`/patient`, { state: state });
             }

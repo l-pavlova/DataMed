@@ -9,7 +9,6 @@ const urlBuilder = (...paths) => {
 }
 
 const initRequest = async (contentType, method, body) => {
-    //refreshToken();
     return {
         method,
         //credentials: 'include', todo:: uncomment when auth is ready
@@ -19,20 +18,6 @@ const initRequest = async (contentType, method, body) => {
         body: body
     }
 };
-
-
-const initBlobRequest = async (contentType, method, body) => {
-    //refreshToken();
-    return {
-        method,
-        //credentials: 'include', todo:: uncomment when auth is ready
-        headers: {
-            ...(contentType && { "Content-Type": contentType })
-        },
-        body: body
-    }
-};
-
 
 const initBaseRequest = initRequest.bind(null, "application/json");
 
@@ -66,25 +51,6 @@ const responseHandler = async res => {
     let r = res.json();
     return r;
 };
-
-
-const responseHandlerCreate = async res => {
-    if (!res.ok) {
-        if (res.status === 401) {
-            let response = await res.json();
-
-            if (response.error?.details !== 'Specify id token for this request!') {
-                // logout();
-            }
-
-            throw response;
-        }
-
-        throw await res.json();
-    }
-    return res.text();
-};
-
 
 const requester = (endpoint) => ({
     get: () => initBaseRequest('GET').then(options => fetch(urlBuilder(endpoint), options)).then(responseHandler),

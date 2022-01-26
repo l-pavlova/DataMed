@@ -63,15 +63,15 @@ const PatientProfile = ({
         userService.updatePatient(data, patientModel.id).then(res => {
             console.log(res)
             userService.getPatientById(patientModel.id).then(gotten => {
-                console.log('handling and shit');
+                console.log('handling');
                 console.log(gotten);
                 setPatient(gotten);
                 setEdit(false);
             })
         })
             .then(r => console.log(r))
-            .catch(err => console.log("IN ERR"))
-            .finally(console.log("PLS IN FINALLY AT LEAST"));
+            .catch(err => console.log("in error"))
+            .finally(console.log("in finally"));
     }
 
     return (<div className='containerche'>
@@ -86,7 +86,7 @@ const PatientProfile = ({
                                 <img width="250" src={image} />
                                 <FileUploader handleFileUpload={handleFileUpload} text="Change profile pic"></FileUploader>
                                 <div className="mt-3">
-                                    <h4>  {patientModel.firstName || 'Bochka'}  {patientModel.lastName || 'Bochkova'}</h4>
+                                    <h4>  {patientModel.firstName || 'Imena'}  {patientModel.lastName || 'Imenova'}</h4>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@ const PatientProfile = ({
                                 <h6 className="mb-0">Full Name</h6>
                             </div>
                             <div className="col-sm-9 text-secondary" >
-                                {patientModel.firstName || 'Bochka'}  {patientModel.lastName || 'Bochkova'}
+                                {patientModel.firstName || 'Imena'}  {patientModel.lastName || 'Imenova'}
                             </div>
                         </div>
                         <hr />
@@ -111,7 +111,7 @@ const PatientProfile = ({
                                 <h6 className="mb-0">Email</h6>
                             </div>
                             <div className="col-sm-9 text-secondary">
-                                {patientModel.email || 'sexypatient@gmail.com'}
+                                {patientModel.email || 'patient@gmail.com'}
                             </div>
                         </div>
                         <hr />
@@ -138,7 +138,7 @@ const PatientProfile = ({
                                 <h6 className="mb-0">egn</h6>
                             </div>
                             <div className="col-sm-9 text-secondary">
-                                {patientModel.egn || '000000000'}
+                                {patientModel.egn || '000000000000'}
                             </div>
                         </div>
                         <hr />

@@ -14,7 +14,7 @@ const RegisterForm = ({
     loading,
 }) => {
     
-    const validationFields = isLogin ? ['email', 'password'] : ['firstName', 'lastName', 'email', 'password'];//'age', 'phoneNumber', 'email', 'position', 'medicalUnit', 'hospital',
+    const validationFields = isLogin ? ['email', 'password'] : ['firstName', 'lastName', 'email', 'password'];
     const initialValues = { firstName: '', lastName: '', age: '', phoneNumber: '', email: '', username: '', position: '', medicalUnit:'', hospital:'', certifications:'', password: '' ,egn: ''};
 
     return (

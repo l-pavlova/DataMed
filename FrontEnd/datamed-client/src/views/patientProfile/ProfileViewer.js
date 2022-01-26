@@ -10,7 +10,7 @@ const ProfileViewer = ({ patientModel }) => {
                         <h6 className="mb-0">Full Name</h6>
                     </div>
                     <div className="col-sm-9 text-secondary" >
-                        {patientModel.firstName || 'Bochka'}  {patientModel.lastName || 'Bochkova'}
+                        {patientModel.firstName || 'Imena'}  {patientModel.lastName || 'Imenova'}
                     </div>
                 </div>
                 <hr />
@@ -19,7 +19,7 @@ const ProfileViewer = ({ patientModel }) => {
                         <h6 className="mb-0">Email</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                        {patient.email || 'sexypatient@gmail.com'}
+                        {patient.email || 'patient@gmail.com'}
                     </div>
                 </div>
                 <hr />
@@ -55,7 +55,7 @@ const ProfileViewer = ({ patientModel }) => {
                         <h6 className="mb-0">Height</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                        {patientModel.height || '198'}
+                        {patientModel.height || 'unknown'}
                     </div>
                 </div>
                 <hr />
@@ -64,7 +64,7 @@ const ProfileViewer = ({ patientModel }) => {
                         <h6 className="mb-0">Weight</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                        {patientModel.weight || '100 kila manqk'}
+                        {patientModel.weight || 'unknown'}
                     </div>
                 </div>
                 <hr />
@@ -73,7 +73,7 @@ const ProfileViewer = ({ patientModel }) => {
                         <h6 className="mb-0">Blood type</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                        {patientModel.bloodType || 'A grupa maqnk'}
+                        {patientModel.bloodType || 'unknown'}
                     </div>
                 </div>
                 <hr />
@@ -91,7 +91,7 @@ const ProfileViewer = ({ patientModel }) => {
                         <h6 className="mb-0">Pills taken</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                        {patientModel.pillsTakenRegularly || 'zdravi sme'}
+                        {patientModel.pillsTakenRegularly || 'unknown'}
                     </div>
                 </div>
                 <hr />
@@ -100,7 +100,7 @@ const ProfileViewer = ({ patientModel }) => {
                         <h6 className="mb-0">Short Medical History</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                        {patientModel.shortMedicalHistory || 'zdravi sme'}
+                        {patientModel.shortMedicalHistory || 'unknown'}
                     </div>
                 </div>
             </div>

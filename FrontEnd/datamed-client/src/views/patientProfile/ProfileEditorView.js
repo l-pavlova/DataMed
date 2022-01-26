@@ -19,7 +19,7 @@ const ProfileEditorView = ({
                             <h6 className="mb-0">Full Name</h6>
                         </div>
                         <div className="col-sm-9 text-secondary" type="text">
-                            {values.firstName || 'Bochka'}  {values.lastName || 'Bochkova'}
+                            {values.firstName || 'Imena'}  {values.lastName || 'Imenova'}
                         </div>
                     </div>
                     <hr />
@@ -28,7 +28,7 @@ const ProfileEditorView = ({
                             <h6 className="mb-0">Email</h6>
                         </div>
                         <div className="col-sm-9 text-secondary">
-                            {values.email || 'sexypatient@gmail.com'}
+                            {values.email || 'patient@gmail.com'}
                         </div>
                     </div>
                     <hr />
