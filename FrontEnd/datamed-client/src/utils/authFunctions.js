@@ -11,7 +11,7 @@ export const login = async (userData) => {
 
 export const signup = async (userData, isDoc) => {
     console.log(userData);
-    isDoc ? userService.registerDoc(userData)
+    return isDoc ? userService.registerDoc(userData)
         .then(doc => console.log(doc)) : userService.registerPatient(userData)
             .then(user => {
                 console.log(user);
@@ -21,6 +21,6 @@ export const signup = async (userData, isDoc) => {
 };
 
 export const logout = async () => {
-     return await userService.logout();
+    return await userService.logout();
 }
 

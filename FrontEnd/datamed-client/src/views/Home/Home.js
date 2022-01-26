@@ -77,7 +77,7 @@ const Home = () => {
         <SearchBar handleSearchPatients={handleFindPatients}>
         </SearchBar>
         {showTable && <UserList
-            users={patients}>
+            users={patients} docId={id}>
         </UserList>}
         {userModel && <Templates>
         </Templates>}

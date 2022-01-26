@@ -12,8 +12,11 @@ const User = ({ props }) => {
     </tr>)
 }
 
-const UserList = ({ users,
-    showUserData }) => {
+const UserList = ({ 
+    users,
+    showUserData,
+    docId
+ }) => {
 
     return (
         <div className='user-container '><table className="table table-striped">
@@ -27,7 +30,7 @@ const UserList = ({ users,
             <tbody>
                 {
                     users.map((user) => <tr key={user.username.toString()} className="table-row">
-                        <td> <Link to={`/patient`} state={{ id: user.id, isDoc: false }}>{user.firstName || 'vascho'}</Link></td>
+                        <td> <Link to={`/patient`} state={{ id: user.id, isDoc: true, docId: docId }}>{user.firstName || 'vascho'}</Link></td>
                         <td>{user.lastName || 'imence '}</td>
                         <td>{user.egn || "egenence"}</td>
                     </tr>)

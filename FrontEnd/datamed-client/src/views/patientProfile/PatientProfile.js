@@ -17,7 +17,7 @@ const PatientProfile = ({
 
 
     const location = useLocation()
-    const { id, isDoc } = location.state;
+    const { id, isDoc, docId } = location.state;
     const [patientModel, setPatient] = useState(false);
     const [isDoctor, setIsDoc] = useState(isDoc)
     const [edit, setEdit] = useState(false);
@@ -75,7 +75,7 @@ const PatientProfile = ({
     }
 
     return (<div className='containerche'>
-        {patientModel && <NavBar>
+        {patientModel && <NavBar values={isDoctor? {id: docId} : patientModel} isSignedIn={true} isDoc={isDoctor}>
         </NavBar>}
         {patientModel && <div className="main-body">
             <div className="row gutters-sm">
@@ -94,7 +94,7 @@ const PatientProfile = ({
                 </div>
             </div>
 
-            {edit ? <ProfileEditor handleSubmit={handleUpdateSubmit} patient={patientModel} handleChange={e => console.log('ops')} ></ProfileEditor> : <div className="col-md-8">
+            {edit ? <ProfileEditor handleSubmit={handleUpdateSubmit} patient={patientModel} handleChange={e => console.log('')} ></ProfileEditor> : <div className="col-md-8">
                 <div className="card mb-3">
                     <div className="card-body">
                         <div className="row">
@@ -207,7 +207,7 @@ const PatientProfile = ({
             }
         </div>
         }
-        {patientModel.records && <MedicalRecords recs={patientModel.records} isDoc={isDoctor} id={patientModel.id} className="medical-records"></MedicalRecords>}
+        <MedicalRecords recs={patientModel.records || []} isDoc={isDoctor} id={id} className="medical-records"></MedicalRecords>
         <Footer>
         </Footer>
     </div>

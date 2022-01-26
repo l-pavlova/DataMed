@@ -15,14 +15,17 @@ const Register = (
 
     const handleRegister = async (userData) => {
         await signup(userData, isDoctor)
-            .then(() => { setIsLogin(true) })
-            .catch((res) => setIsLogin(false));
+            .then(p => { console.log(p); setIsLogin(true) })
     };
 
     const handleLogin = async (userData) => {
         let data = { username: userData.username, password: userData.password };
         await login(data).then((data) => {
             console.log(data);
+            if (!data.id) {
+                alert("Wrong credentials!")
+                return;
+            }
             if (data.role == "ROLE_DOCTOR") {
                 console.log('doctorche')
                 navigate(`/${data.id}`);
