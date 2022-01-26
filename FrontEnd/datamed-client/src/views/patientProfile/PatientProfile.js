@@ -84,7 +84,7 @@ const PatientProfile = ({
                         <div className="card-body">
                             <div className="d-flex flex-column align-items-center text-center">
                                 <img width="250" src={image} />
-                                <FileUploader handleFileUpload={handleFileUpload} text="Change profile pic"></FileUploader>
+                                {!isDoctor && <FileUploader handleFileUpload={handleFileUpload} text="Change profile pic"></FileUploader>}
                                 <div className="mt-3">
                                     <h4>  {patientModel.firstName || 'Imena'}  {patientModel.lastName || 'Imenova'}</h4>
                                 </div>
